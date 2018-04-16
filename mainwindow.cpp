@@ -23,6 +23,7 @@ cl::Platform temp_platform;
 cl::Platform current_platform;
 cl::Device temp_device;
 cl::Device current_device;
+QString defaultDir;
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -75,7 +76,7 @@ void MainWindow::on_pushButton_clicked()
     QStringList files = QFileDialog::getOpenFileNames(
                 this,
                 tr("Select light frames"),
-                "C://",
+                defaultDir,
                 "TIFF (*.tif);;JPEG (*.jpg);;RAW (*.CR2)");
     if (!files.size() == 0) {
         for (int i = 0; i < files.size(); i++) {
@@ -190,4 +191,17 @@ void MainWindow::on_comboBox_2_currentIndexChanged(int index)
 {
     //current_device = all_devices[index];
     refreshUsedDevice();
+}
+
+void MainWindow::on_pushButton_5_clicked()
+{
+    QFileDialog dialog(this);
+    dialog.setFileMode(QFileDialog::Directory);
+    QString folder;
+
+    folder = QFileDialog::getExistingDirectory(0, ("Select default directory"), QDir::currentPath());
+
+
+
+    defaultDir = folder;
 }

@@ -34,6 +34,8 @@ private slots:
 
     void on_comboBox_2_currentIndexChanged(int index);
 
+    void on_pushButton_5_clicked();
+
 protected:
     void mouseMoveEvent(QMouseEvent * event);
 

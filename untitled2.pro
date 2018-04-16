@@ -19,6 +19,8 @@ HEADERS  += mainwindow.h
 
 FORMS    += mainwindow.ui
 
+
+#Include OpenCL libraries
 win32:CONFIG(release, debug|release): LIBS += -Ld:/opencl/lib/x86/ -lOpenCL
 else:win32:CONFIG(debug, debug|release): LIBS += -Ld:/opencl/lib/x86/ -lOpenCL
 
