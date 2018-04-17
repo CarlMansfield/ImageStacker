@@ -325,29 +325,14 @@
     </property>
     <column>
      <property name="text">
-      <string>Frames</string>
+      <string>Path</string>
      </property>
     </column>
-    <item>
+    <column>
      <property name="text">
-      <string>Lights</string>
+      <string>Name</string>
      </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Darks</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Flats</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Bias</string>
-     </property>
-    </item>
+    </column>
    </widget>
    <widget class="QTreeWidget" name="flatsTree">
     <property name="enabled">
@@ -369,29 +354,14 @@
     </property>
     <column>
      <property name="text">
-      <string>Frames</string>
+      <string>Path</string>
      </property>
     </column>
-    <item>
+    <column>
      <property name="text">
-      <string>Lights</string>
+      <string>Name</string>
      </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Darks</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Flats</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Bias</string>
-     </property>
-    </item>
+    </column>
    </widget>
    <widget class="QTreeWidget" name="biasTree">
     <property name="enabled">
@@ -413,29 +383,14 @@
     </property>
     <column>
      <property name="text">
-      <string>Frames</string>
+      <string>Path</string>
      </property>
     </column>
-    <item>
+    <column>
      <property name="text">
-      <string>Lights</string>
+      <string>Name</string>
      </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Darks</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Flats</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Bias</string>
-     </property>
-    </item>
+    </column>
    </widget>
    <widget class="QGraphicsView" name="graphicsView">
     <property name="geometry">

@@ -140,28 +140,16 @@ public:
         tab_4->setObjectName(QStringLiteral("tab_4"));
         tabWidget->addTab(tab_4, QString());
         darksTree = new QTreeWidget(centralWidget);
-        new QTreeWidgetItem(darksTree);
-        new QTreeWidgetItem(darksTree);
-        new QTreeWidgetItem(darksTree);
-        new QTreeWidgetItem(darksTree);
         darksTree->setObjectName(QStringLiteral("darksTree"));
         darksTree->setEnabled(true);
         darksTree->setGeometry(QRect(100, 450, 961, 192));
         darksTree->setMinimumSize(QSize(259, 192));
         flatsTree = new QTreeWidget(centralWidget);
-        new QTreeWidgetItem(flatsTree);
-        new QTreeWidgetItem(flatsTree);
-        new QTreeWidgetItem(flatsTree);
-        new QTreeWidgetItem(flatsTree);
         flatsTree->setObjectName(QStringLiteral("flatsTree"));
         flatsTree->setEnabled(true);
         flatsTree->setGeometry(QRect(100, 450, 961, 192));
         flatsTree->setMinimumSize(QSize(259, 192));
         biasTree = new QTreeWidget(centralWidget);
-        new QTreeWidgetItem(biasTree);
-        new QTreeWidgetItem(biasTree);
-        new QTreeWidgetItem(biasTree);
-        new QTreeWidgetItem(biasTree);
         biasTree->setObjectName(QStringLiteral("biasTree"));
         biasTree->setEnabled(true);
         biasTree->setGeometry(QRect(100, 450, 961, 192));
@@ -266,50 +254,14 @@ public:
         tabWidget->setTabText(tabWidget->indexOf(tab_3), QApplication::translate("MainWindow", "Flats", Q_NULLPTR));
         tabWidget->setTabText(tabWidget->indexOf(tab_4), QApplication::translate("MainWindow", "Bias", Q_NULLPTR));
         QTreeWidgetItem *___qtreewidgetitem1 = darksTree->headerItem();
-        ___qtreewidgetitem1->setText(0, QApplication::translate("MainWindow", "Frames", Q_NULLPTR));
-
-        const bool __sortingEnabled = darksTree->isSortingEnabled();
-        darksTree->setSortingEnabled(false);
-        QTreeWidgetItem *___qtreewidgetitem2 = darksTree->topLevelItem(0);
-        ___qtreewidgetitem2->setText(0, QApplication::translate("MainWindow", "Lights", Q_NULLPTR));
-        QTreeWidgetItem *___qtreewidgetitem3 = darksTree->topLevelItem(1);
-        ___qtreewidgetitem3->setText(0, QApplication::translate("MainWindow", "Darks", Q_NULLPTR));
-        QTreeWidgetItem *___qtreewidgetitem4 = darksTree->topLevelItem(2);
-        ___qtreewidgetitem4->setText(0, QApplication::translate("MainWindow", "Flats", Q_NULLPTR));
-        QTreeWidgetItem *___qtreewidgetitem5 = darksTree->topLevelItem(3);
-        ___qtreewidgetitem5->setText(0, QApplication::translate("MainWindow", "Bias", Q_NULLPTR));
-        darksTree->setSortingEnabled(__sortingEnabled);
-
-        QTreeWidgetItem *___qtreewidgetitem6 = flatsTree->headerItem();
-        ___qtreewidgetitem6->setText(0, QApplication::translate("MainWindow", "Frames", Q_NULLPTR));
-
-        const bool __sortingEnabled1 = flatsTree->isSortingEnabled();
-        flatsTree->setSortingEnabled(false);
-        QTreeWidgetItem *___qtreewidgetitem7 = flatsTree->topLevelItem(0);
-        ___qtreewidgetitem7->setText(0, QApplication::translate("MainWindow", "Lights", Q_NULLPTR));
-        QTreeWidgetItem *___qtreewidgetitem8 = flatsTree->topLevelItem(1);
-        ___qtreewidgetitem8->setText(0, QApplication::translate("MainWindow", "Darks", Q_NULLPTR));
-        QTreeWidgetItem *___qtreewidgetitem9 = flatsTree->topLevelItem(2);
-        ___qtreewidgetitem9->setText(0, QApplication::translate("MainWindow", "Flats", Q_NULLPTR));
-        QTreeWidgetItem *___qtreewidgetitem10 = flatsTree->topLevelItem(3);
-        ___qtreewidgetitem10->setText(0, QApplication::translate("MainWindow", "Bias", Q_NULLPTR));
-        flatsTree->setSortingEnabled(__sortingEnabled1);
-
-        QTreeWidgetItem *___qtreewidgetitem11 = biasTree->headerItem();
-        ___qtreewidgetitem11->setText(0, QApplication::translate("MainWindow", "Frames", Q_NULLPTR));
-
-        const bool __sortingEnabled2 = biasTree->isSortingEnabled();
-        biasTree->setSortingEnabled(false);
-        QTreeWidgetItem *___qtreewidgetitem12 = biasTree->topLevelItem(0);
-        ___qtreewidgetitem12->setText(0, QApplication::translate("MainWindow", "Lights", Q_NULLPTR));
-        QTreeWidgetItem *___qtreewidgetitem13 = biasTree->topLevelItem(1);
-        ___qtreewidgetitem13->setText(0, QApplication::translate("MainWindow", "Darks", Q_NULLPTR));
-        QTreeWidgetItem *___qtreewidgetitem14 = biasTree->topLevelItem(2);
-        ___qtreewidgetitem14->setText(0, QApplication::translate("MainWindow", "Flats", Q_NULLPTR));
-        QTreeWidgetItem *___qtreewidgetitem15 = biasTree->topLevelItem(3);
-        ___qtreewidgetitem15->setText(0, QApplication::translate("MainWindow", "Bias", Q_NULLPTR));
-        biasTree->setSortingEnabled(__sortingEnabled2);
-
+        ___qtreewidgetitem1->setText(1, QApplication::translate("MainWindow", "Name", Q_NULLPTR));
+        ___qtreewidgetitem1->setText(0, QApplication::translate("MainWindow", "Path", Q_NULLPTR));
+        QTreeWidgetItem *___qtreewidgetitem2 = flatsTree->headerItem();
+        ___qtreewidgetitem2->setText(1, QApplication::translate("MainWindow", "Name", Q_NULLPTR));
+        ___qtreewidgetitem2->setText(0, QApplication::translate("MainWindow", "Path", Q_NULLPTR));
+        QTreeWidgetItem *___qtreewidgetitem3 = biasTree->headerItem();
+        ___qtreewidgetitem3->setText(1, QApplication::translate("MainWindow", "Name", Q_NULLPTR));
+        ___qtreewidgetitem3->setText(0, QApplication::translate("MainWindow", "Path", Q_NULLPTR));
         platform->setText(QApplication::translate("MainWindow", "TextLabel", Q_NULLPTR));
         pushButton_5->setText(QApplication::translate("MainWindow", "Directory", Q_NULLPTR));
         menuHello->setTitle(QApplication::translate("MainWindow", "Hello", Q_NULLPTR));
