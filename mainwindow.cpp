@@ -32,9 +32,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     this->setFixedSize(this->maximumSize());
     ui->lightsTree->setContextMenuPolicy(Qt::ActionsContextMenu);
-    QAction* egg;
-    egg = new QAction("Remove", this);
-    ui->lightsTree->addAction(egg);
+    QAction* removeAction;
+    removeAction = new QAction("Remove", this);
+    ui->lightsTree->addAction(removeAction);
     ui->graphicsView->setMouseTracking(true);
     ui->graphicsView->setStyleSheet("background: transparent");
     scene = new QGraphicsScene(this);
