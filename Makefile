@@ -230,6 +230,7 @@ Makefile: untitled2.pro ..\..\..\Qt\5.9.1\msvc2015\mkspecs\win32-msvc\qmake.conf
 		..\..\..\Qt\5.9.1\msvc2015\mkspecs\features\qt_config.prf \
 		..\..\..\Qt\5.9.1\msvc2015\mkspecs\win32-msvc\qmake.conf \
 		..\..\..\Qt\5.9.1\msvc2015\mkspecs\features\spec_post.prf \
+		.qmake.stash \
 		..\..\..\Qt\5.9.1\msvc2015\mkspecs\features\exclusive_builds.prf \
 		..\..\..\Qt\5.9.1\msvc2015\mkspecs\common\msvc-version.conf \
 		..\..\..\Qt\5.9.1\msvc2015\mkspecs\features\toolchain.prf \
@@ -414,6 +415,7 @@ Makefile: untitled2.pro ..\..\..\Qt\5.9.1\msvc2015\mkspecs\win32-msvc\qmake.conf
 ..\..\..\Qt\5.9.1\msvc2015\mkspecs\features\qt_config.prf:
 ..\..\..\Qt\5.9.1\msvc2015\mkspecs\win32-msvc\qmake.conf:
 ..\..\..\Qt\5.9.1\msvc2015\mkspecs\features\spec_post.prf:
+.qmake.stash:
 ..\..\..\Qt\5.9.1\msvc2015\mkspecs\features\exclusive_builds.prf:
 ..\..\..\Qt\5.9.1\msvc2015\mkspecs\common\msvc-version.conf:
 ..\..\..\Qt\5.9.1\msvc2015\mkspecs\features\toolchain.prf:

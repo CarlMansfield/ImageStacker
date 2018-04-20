@@ -14,10 +14,10 @@ CXX           = cl
 DEFINES       = -DUNICODE -DWIN32 -DQT_QML_DEBUG -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DNDEBUG
 CFLAGS        = -nologo -Zc:wchar_t -FS -Zc:strictStrings -O2 -MD -W3 -w44456 -w44457 -w44458 $(DEFINES)
 CXXFLAGS      = -nologo -Zc:wchar_t -FS -Zc:rvalueCast -Zc:inline -Zc:strictStrings -Zc:throwingNew -Zc:referenceBinding -O2 -MD -W3 -w34100 -w34189 -w44996 -w44456 -w44457 -w44458 -wd4577 -wd4467 -EHsc $(DEFINES)
-INCPATH       = -I. -Id:\opencl\include -Id:\EDSDK\Header -I..\..\..\Qt\5.9.1\msvc2015\include -I..\..\..\Qt\5.9.1\msvc2015\include\QtWidgets -I..\..\..\Qt\5.9.1\msvc2015\include\QtGui -I..\..\..\Qt\5.9.1\msvc2015\include\QtANGLE -I..\..\..\Qt\5.9.1\msvc2015\include\QtCore -Irelease -I. -I..\..\..\Qt\5.9.1\msvc2015\mkspecs\win32-msvc 
+INCPATH       = -I. -Id:\opencl\include -Ilibraw -I..\..\..\Qt\5.9.1\msvc2015\include -I..\..\..\Qt\5.9.1\msvc2015\include\QtWidgets -I..\..\..\Qt\5.9.1\msvc2015\include\QtGui -I..\..\..\Qt\5.9.1\msvc2015\include\QtANGLE -I..\..\..\Qt\5.9.1\msvc2015\include\QtCore -Irelease -I. -I..\..\..\Qt\5.9.1\msvc2015\mkspecs\win32-msvc 
 LINKER        = link
 LFLAGS        = /NOLOGO /DYNAMICBASE /NXCOMPAT /INCREMENTAL:NO /SUBSYSTEM:WINDOWS "/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'"
-LIBS          = /LIBPATH:D:\Qt\5.9.1\msvc2015\lib D:\Qt\5.9.1\msvc2015\lib\qtmain.lib /LIBPATH:C:\Utils\my_sql\my_sqlx86\lib /LIBPATH:C:\Utils\postgresqlx86\pgsql\lib shell32.lib /LIBPATH:d:\opencl\lib\x86 d:\opencl\lib\x86\OpenCL.lib d:\EDSDK\Library\EDSDK.lib D:\Qt\5.9.1\msvc2015\lib\Qt5Widgets.lib D:\Qt\5.9.1\msvc2015\lib\Qt5Gui.lib D:\Qt\5.9.1\msvc2015\lib\Qt5Core.lib 
+LIBS          = /LIBPATH:D:\Qt\5.9.1\msvc2015\lib D:\Qt\5.9.1\msvc2015\lib\qtmain.lib /LIBPATH:C:\Utils\my_sql\my_sqlx86\lib /LIBPATH:C:\Utils\postgresqlx86\pgsql\lib shell32.lib /LIBPATH:d:\opencl\lib\x86 d:\opencl\lib\x86\OpenCL.lib /LIBPATH:"D:\Carl\My Documents\ImageStacker\libraw\lib" "D:\Carl\My Documents\ImageStacker\libraw\lib\libraw.lib" D:\Qt\5.9.1\msvc2015\lib\Qt5Widgets.lib D:\Qt\5.9.1\msvc2015\lib\Qt5Gui.lib D:\Qt\5.9.1\msvc2015\lib\Qt5Core.lib 
 QMAKE         = D:\Qt\5.9.1\msvc2015\bin\qmake.exe
 IDC           = idc
 IDL           = midl /NOLOGO
@@ -282,7 +282,7 @@ release\moc_mainwindow.cpp: ..\..\..\Qt\5.9.1\msvc2015\include\QtWidgets\QMainWi
 		mainwindow.h \
 		release\moc_predefs.h \
 		..\..\..\Qt\5.9.1\msvc2015\bin\moc.exe
-	D:\Qt\5.9.1\msvc2015\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include release/moc_predefs.h -ID:/Qt/5.9.1/msvc2015/mkspecs/win32-msvc -I"D:/Carl/My Documents/ImageStacker" -Id:/opencl/include -Id:/EDSDK/Header -ID:/Qt/5.9.1/msvc2015/include -ID:/Qt/5.9.1/msvc2015/include/QtWidgets -ID:/Qt/5.9.1/msvc2015/include/QtGui -ID:/Qt/5.9.1/msvc2015/include/QtANGLE -ID:/Qt/5.9.1/msvc2015/include/QtCore -I"D:\Program Files (x86)\Microsoft Visual Studio\VC\Tools\MSVC\14.12.25827\ATLMFC\include" -I"D:\Program Files (x86)\Microsoft Visual Studio\VC\Tools\MSVC\14.12.25827\include" -I"C:\Program Files (x86)\Windows Kits\NETFXSDK\4.6.1\include\um" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.16299.0\ucrt" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.16299.0\shared" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.16299.0\um" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.16299.0\winrt" mainwindow.h -o release\moc_mainwindow.cpp
+	D:\Qt\5.9.1\msvc2015\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include release/moc_predefs.h -ID:/Qt/5.9.1/msvc2015/mkspecs/win32-msvc -I"D:/Carl/My Documents/ImageStacker" -Id:/opencl/include -I"D:/Carl/My Documents/ImageStacker/libraw" -ID:/Qt/5.9.1/msvc2015/include -ID:/Qt/5.9.1/msvc2015/include/QtWidgets -ID:/Qt/5.9.1/msvc2015/include/QtGui -ID:/Qt/5.9.1/msvc2015/include/QtANGLE -ID:/Qt/5.9.1/msvc2015/include/QtCore -I"D:\Program Files (x86)\Microsoft Visual Studio\VC\Tools\MSVC\14.12.25827\ATLMFC\include" -I"D:\Program Files (x86)\Microsoft Visual Studio\VC\Tools\MSVC\14.12.25827\include" -I"C:\Program Files (x86)\Windows Kits\NETFXSDK\4.6.1\include\um" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.16299.0\ucrt" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.16299.0\shared" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.16299.0\um" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.16299.0\winrt" mainwindow.h -o release\moc_mainwindow.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -572,6 +572,41 @@ release\mainwindow.obj: mainwindow.cpp mainwindow.h \
 		..\..\..\Qt\5.9.1\msvc2015\include\QtWidgets\QGraphicsItem \
 		..\..\..\Qt\5.9.1\msvc2015\include\QtWidgets\qgraphicsitem.h \
 		ui_mainwindow.h \
+		..\..\..\Qt\5.9.1\msvc2015\include\QtCore\QVariant \
+		..\..\..\Qt\5.9.1\msvc2015\include\QtWidgets\QAction \
+		..\..\..\Qt\5.9.1\msvc2015\include\QtWidgets\qaction.h \
+		..\..\..\Qt\5.9.1\msvc2015\include\QtWidgets\qactiongroup.h \
+		..\..\..\Qt\5.9.1\msvc2015\include\QtWidgets\QApplication \
+		..\..\..\Qt\5.9.1\msvc2015\include\QtWidgets\qapplication.h \
+		..\..\..\Qt\5.9.1\msvc2015\include\QtCore\qcoreapplication.h \
+		..\..\..\Qt\5.9.1\msvc2015\include\QtCore\qeventloop.h \
+		..\..\..\Qt\5.9.1\msvc2015\include\QtWidgets\qdesktopwidget.h \
+		..\..\..\Qt\5.9.1\msvc2015\include\QtGui\qguiapplication.h \
+		..\..\..\Qt\5.9.1\msvc2015\include\QtGui\qinputmethod.h \
+		..\..\..\Qt\5.9.1\msvc2015\include\QtWidgets\QButtonGroup \
+		..\..\..\Qt\5.9.1\msvc2015\include\QtWidgets\qbuttongroup.h \
+		..\..\..\Qt\5.9.1\msvc2015\include\QtWidgets\QComboBox \
+		..\..\..\Qt\5.9.1\msvc2015\include\QtWidgets\qcombobox.h \
+		..\..\..\Qt\5.9.1\msvc2015\include\QtWidgets\QGraphicsView \
+		..\..\..\Qt\5.9.1\msvc2015\include\QtWidgets\qgraphicsview.h \
+		..\..\..\Qt\5.9.1\msvc2015\include\QtGui\qpainter.h \
+		..\..\..\Qt\5.9.1\msvc2015\include\QtGui\qtextoption.h \
+		..\..\..\Qt\5.9.1\msvc2015\include\QtWidgets\qscrollarea.h \
+		..\..\..\Qt\5.9.1\msvc2015\include\QtWidgets\QHeaderView \
+		..\..\..\Qt\5.9.1\msvc2015\include\QtWidgets\qheaderview.h \
+		..\..\..\Qt\5.9.1\msvc2015\include\QtWidgets\QLabel \
+		..\..\..\Qt\5.9.1\msvc2015\include\QtWidgets\qlabel.h \
+		..\..\..\Qt\5.9.1\msvc2015\include\QtWidgets\QMenu \
+		..\..\..\Qt\5.9.1\msvc2015\include\QtWidgets\qmenu.h \
+		..\..\..\Qt\5.9.1\msvc2015\include\QtWidgets\QMenuBar \
+		..\..\..\Qt\5.9.1\msvc2015\include\QtWidgets\qmenubar.h \
+		..\..\..\Qt\5.9.1\msvc2015\include\QtWidgets\QPushButton \
+		..\..\..\Qt\5.9.1\msvc2015\include\QtWidgets\qpushbutton.h \
+		..\..\..\Qt\5.9.1\msvc2015\include\QtWidgets\qabstractbutton.h \
+		..\..\..\Qt\5.9.1\msvc2015\include\QtWidgets\QStatusBar \
+		..\..\..\Qt\5.9.1\msvc2015\include\QtWidgets\qstatusbar.h \
+		..\..\..\Qt\5.9.1\msvc2015\include\QtWidgets\QTabWidget \
+		..\..\..\Qt\5.9.1\msvc2015\include\QtWidgets\QWidget \
 		..\..\..\Qt\5.9.1\msvc2015\include\QtWidgets\QFileDialog \
 		..\..\..\Qt\5.9.1\msvc2015\include\QtWidgets\qfiledialog.h \
 		..\..\..\Qt\5.9.1\msvc2015\include\QtCore\qdir.h \
@@ -580,9 +615,13 @@ release\mainwindow.obj: mainwindow.cpp mainwindow.h \
 		..\..\..\Qt\5.9.1\msvc2015\include\QtWidgets\QMessageBox \
 		..\..\..\Qt\5.9.1\msvc2015\include\QtWidgets\qmessagebox.h \
 		..\..\..\Qt\5.9.1\msvc2015\include\QtCore\QDebug \
-		d:\EDSDK\Header\EDSDK.h \
-		d:\EDSDK\Header\EDSDKTypes.h \
-		d:\EDSDK\Header\EDSDKErrors.h \
+		libraw\libraw.h \
+		libraw\libraw_datastream.h \
+		libraw\libraw_const.h \
+		libraw\libraw_types.h \
+		libraw\libraw_version.h \
+		libraw\libraw_internal.h \
+		libraw\libraw_alloc.h \
 		d:\opencl\include\CL\cl.hpp \
 		d:\opencl\include\CL\cl_d3d10.h \
 		d:\opencl\include\CL\cl.h \

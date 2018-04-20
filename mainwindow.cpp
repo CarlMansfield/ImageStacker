@@ -7,9 +7,7 @@
 #include<string>
 #include<utility>
 #include <iostream>
-#include<EDSDK.h>
-#include<EDSDKTypes.h>
-#include<EDSDKErrors.h>
+#include <libraw/libraw.h>
 
 #ifdef __APPLE__
 #include <OpenCL/cl.hpp>
@@ -73,6 +71,7 @@ MainWindow::~MainWindow()
 void MainWindow::on_pushButton_clicked()
 {
     QPixmap pixmap;
+    QString filename;
     QStringList files = QFileDialog::getOpenFileNames(
                 this,
                 tr("Select light frames"),
@@ -80,7 +79,7 @@ void MainWindow::on_pushButton_clicked()
                 "TIFF (*.tif);;JPEG (*.jpg);;RAW (*.CR2)");
     if (!files.size() == 0) {
         for (int i = 0; i < files.size(); i++) {
-            QString filename = files.at(i);
+            filename = files.at(i);
             pixmap = QPixmap(filename);
 
             QTreeWidgetItem *item = new QTreeWidgetItem();
@@ -101,6 +100,7 @@ void MainWindow::on_pushButton_clicked()
         ui->lightsTree->raise();
         scene->clear();
         scene->addPixmap(pixmap);
+        open_image(filename);
         ui->graphicsView->fitInView(scene->sceneRect(), Qt::KeepAspectRatio);
     }
 }
@@ -148,14 +148,6 @@ void MainWindow::on_lightsTree_itemSelectionChanged()
     QByteArray output(test.toStdString().c_str());
     QPixmap pixmap(filename);
     scene->clear();
-    EdsStreamRef input_stream;
-    //EdsCreateFileStream(name.data(), kEdsFileCreateDisposition_OpenExisting, kEdsAccess_Read, &input_stream);
-    /*EdsImageRef input_image;
-    EdsCreateImageRef(input_stream, &input_image);
-    EdsStreamRef output_stream;
-    EdsCreateFileStream(output.data(), kEdsFileCreateDisposition_CreateAlways, kEdsAccess_Write, &output_stream);
-    EdsSaveImageSetting settings;
-    EdsSaveImage(input_image, kEdsTargetImageType_Jpeg, settings, output_stream);*/
     scene->addPixmap(pixmap);
     ui->graphicsView->ensureVisible(scene->sceneRect());
     ui->graphicsView->fitInView(scene->itemsBoundingRect(), Qt::KeepAspectRatio);
@@ -204,4 +196,25 @@ void MainWindow::on_pushButton_5_clicked()
 
 
     defaultDir = folder;
+}
+
+
+void MainWindow::open_image(QString file) {
+    LibRaw processor;
+    processor.open_file(file.toStdString().c_str());
+
+    //printf("Image size: %d x %d\n", processor.imgdata.sizes.width, processor.imgdata.sizes.height);
+    //qDebug(file.toStdString().c_str());
+    qDebug("Info: %d", processor.imgdata.other.iso_speed);
+    qDebug("Info: %d", processor.imgdata.other.SensorTemperature2);
+
+    processor.unpack();
+
+    qDebug("Image size: %d x %d\n", processor.imgdata.sizes.width, processor.imgdata.sizes.height);
+
+
+    processor.raw2image();
+
+    //printf("Image size: %d x %d\n", processor.imgdata.sizes.width, processor.imgdata.sizes.height);
+    processor.recycle();
 }
