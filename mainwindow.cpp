@@ -6,8 +6,11 @@
 #include<sstream>
 #include<string>
 #include<utility>
+#include <cassert>
 #include <iostream>
+#include <iomanip>
 #include <libraw/libraw.h>
+#include <exiv2/exiv2.hpp>
 
 #ifdef __APPLE__
 #include <OpenCL/cl.hpp>
@@ -76,7 +79,7 @@ void MainWindow::on_pushButton_clicked()
                 this,
                 tr("Select light frames"),
                 defaultDir,
-                "TIFF (*.tif);;JPEG (*.jpg);;RAW (*.CR2)");
+                tr("Image files (*.tif *.jpg *.CR2"));
     if (!files.size() == 0) {
         for (int i = 0; i < files.size(); i++) {
             filename = files.at(i);
@@ -202,11 +205,10 @@ void MainWindow::on_pushButton_5_clicked()
 void MainWindow::open_image(QString file) {
     LibRaw processor;
     processor.open_file(file.toStdString().c_str());
-
     //printf("Image size: %d x %d\n", processor.imgdata.sizes.width, processor.imgdata.sizes.height);
     //qDebug(file.toStdString().c_str());
-    qDebug("Info: %d", processor.imgdata.other.iso_speed);
-    qDebug("Info: %d", processor.imgdata.other.SensorTemperature2);
+    qDebug("Info: %d", processor.imgdata.idata.make);
+    qDebug("Info: %d", processor.imgdata.other.CameraTemperature);
 
     processor.unpack();
 
@@ -217,4 +219,45 @@ void MainWindow::open_image(QString file) {
 
     //printf("Image size: %d x %d\n", processor.imgdata.sizes.width, processor.imgdata.sizes.height);
     processor.recycle();
+
+
+    try {
+        qDebug(file.toStdString().c_str());
+        Exiv2::Image::AutoPtr image = Exiv2::ImageFactory::open(file.toStdString().c_str(), sizeof(file.toStdString().c_str()));
+        assert(image.get() != 0);
+        image->readMetadata();
+
+        Exiv2::ExifData &exifData = image->exifData();
+        if (exifData.empty()) {
+            std::string error(file.toStdString().c_str());
+            error += ": No Exif data found in the file";
+            throw Exiv2::Error(1, error);
+        }
+
+        Exiv2::ExifData::const_iterator end = exifData.end();
+        for (Exiv2::ExifData::const_iterator i = exifData.begin(); i != end; ++i) {
+            const char* tn = i->typeName();
+            std::cout << std::setw(44) << std::setfill(' ') << std::left
+                      << i->key() << " "
+                      << "0x" << std::setw(4) << std::setfill('0') << std::right
+                      << std::hex << i->tag() << " "
+                      << std::setw(9) << std::setfill(' ') << std::left
+                      << (tn ? tn : "Unknown") << " "
+                      << std::dec << std::setw(3)
+                      << std::setfill(' ') << std::right
+                      << i->count() << "  "
+                      << std::dec << i->value()
+                      << "\n";
+        }
+
+
+
+    } catch (Exiv2::AnyError& e) {
+        //std::cout << "Caught Exiv2 exception '" << e.what() << "'\n";
+        qDebug(e.what());
+    }
+
+
+
+
 }

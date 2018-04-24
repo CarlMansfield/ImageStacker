@@ -6,7 +6,6 @@
 #include <QTreeWidgetItem>
 #include <QGraphicsScene>
 #include <QGraphicsItem>
-#include "image.h"
 
 namespace Ui {
 class MainWindow;
@@ -18,7 +17,6 @@ class MainWindow : public QMainWindow
 
 public:
     explicit MainWindow(QWidget *parent = 0);
-    std::vector<Image> images;
     ~MainWindow();
 
 private slots:
