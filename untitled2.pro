@@ -26,6 +26,16 @@ INCLUDEPATH += d:/opencl/include
 
 DEPENDPATH += d:/opencl/include
 
+macx {
+QMAKE_MAC_SDK = macosx10.13
+QMAKE_LFLAGS += -framework OpenCL
+INCLUDEPATH += $$PWD/../../../../usr/local/include
+DEPENDPATH += $$PWD/../../../../usr/local/include
+
+LIBS += $$PWD/../../../../usr/local/lib/libraw.dylib\
+        $$PWD/../../../../usr/local/lib/libexiv2.dylib
+}
+
 win32: LIBS += -L$$PWD/libraw/lib/ -llibraw
 
 win32 {

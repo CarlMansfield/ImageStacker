@@ -13,7 +13,7 @@
 #include <exiv2/exiv2.hpp>
 
 #ifdef __APPLE__
-#include <OpenCL/cl.hpp>
+#include <cl.hpp>
 #else
 #include <CL/cl.hpp>
 #endif
