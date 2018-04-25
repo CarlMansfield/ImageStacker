@@ -233,25 +233,25 @@ void MainWindow::open_image(QString file) {
             error += ": No Exif data found in the file";
             throw Exiv2::Error(1, error);
         }
+        Exiv2::Exifdatum& tag = exifData["Exif.Photo.ISOSpeedRatings"];
+        QString iso = QString::fromStdString(tag.toString());
+        tag = exifData["Exif.Image.Model"];
+        QString model = QString::fromStdString(tag.toString());
+        tag = exifData["Exif.Image.DateTime"];
+        QString dateTime = QString::fromStdString(tag.toString());
+        tag = exifData["Exif.Photo.ExposureTime"];
+        QString exposure = QString::fromStdString(tag.toString());
+        qDebug("ISO: %s", iso.toStdString().c_str());
+        qDebug("Model: %s", model.toStdString().c_str());
+        qDebug("Date/Time: %s", dateTime.toStdString().c_str());
+        qDebug("Exposure: %s", exposure.toStdString().c_str());
 
-        Exiv2::ExifData::const_iterator end = exifData.end();
-        for (Exiv2::ExifData::const_iterator i = exifData.begin(); i != end; ++i) {
-            const char* tn = i->typeName();
-            std::cout << std::setw(44) << std::setfill(' ') << std::left
-                      << i->key() << " "
-                      << "0x" << std::setw(4) << std::setfill('0') << std::right
-                      << std::hex << i->tag() << " "
-                      << std::setw(9) << std::setfill(' ') << std::left
-                      << (tn ? tn : "Unknown") << " "
-                      << std::dec << std::setw(3)
-                      << std::setfill(' ') << std::right
-                      << i->count() << "  "
-                      << std::dec << i->value()
-                      << "\n";
-        }
-
-
-
+        /*
+         * Exif.Photo.ISOSpeedRatings                   0x8827 Short       1  1600
+         * Exif.Image.DateTime                          0x0132 Ascii      20  2018:01:06 21:46:15
+         * Exif.Image.Model                             0x0110 Ascii      16  Canon EOS 1000D
+         * Exif.Photo.ExposureTime                      0x829a Rational    1  600/1
+        */
     } catch (Exiv2::AnyError& e) {
         //std::cout << "Caught Exiv2 exception '" << e.what() << "'\n";
         qDebug(e.what());

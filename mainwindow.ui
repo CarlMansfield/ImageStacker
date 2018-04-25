@@ -186,6 +186,26 @@
       <string>Name</string>
      </property>
     </column>
+    <column>
+     <property name="text">
+      <string>ISO</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Exposure</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Date/Time</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Camera</string>
+     </property>
+    </column>
    </widget>
    <widget class="QTabWidget" name="tabWidget">
     <property name="geometry">
@@ -333,6 +353,26 @@
       <string>Name</string>
      </property>
     </column>
+    <column>
+     <property name="text">
+      <string>ISO</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Exposure</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Date/Time</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Camera</string>
+     </property>
+    </column>
    </widget>
    <widget class="QTreeWidget" name="flatsTree">
     <property name="enabled">
@@ -362,6 +402,26 @@
       <string>Name</string>
      </property>
     </column>
+    <column>
+     <property name="text">
+      <string>ISO</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Exposure</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Date/Time</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Camera</string>
+     </property>
+    </column>
    </widget>
    <widget class="QTreeWidget" name="biasTree">
     <property name="enabled">
@@ -389,6 +449,26 @@
     <column>
      <property name="text">
       <string>Name</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>ISO</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Exposure</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Date/Time</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Camera</string>
      </property>
     </column>
    </widget>
