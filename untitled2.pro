@@ -12,9 +12,13 @@ TARGET = untitled2
 TEMPLATE = app
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    imagedata.cpp \
+    imagedata.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    imagedata.h \
+    imagedata.h
 
 FORMS    += mainwindow.ui
 

@@ -31,6 +31,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    //ui->label_2->setPalette(QPalette::Light);
     this->setFixedSize(this->maximumSize());
     ui->lightsTree->setContextMenuPolicy(Qt::ActionsContextMenu);
     QAction* removeAction;
@@ -73,7 +74,6 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_clicked()
 {
-    QPixmap pixmap;
     QString filename;
     QStringList files = QFileDialog::getOpenFileNames(
                 this,
@@ -83,29 +83,10 @@ void MainWindow::on_pushButton_clicked()
     if (!files.size() == 0) {
         for (int i = 0; i < files.size(); i++) {
             filename = files.at(i);
-            pixmap = QPixmap(filename);
-
-            QTreeWidgetItem *item = new QTreeWidgetItem();
-            item->setText(0, filename);
-            int temp = 0;
-            temp = std::count(filename.begin(), filename.end(), '/');
-            std::vector<std::string> path;
-            std::stringstream ss(filename.toStdString().c_str());
-            std::string part;
-            while (std::getline(ss, part, '/')) {
-                path.push_back(part);
-            }
-            //QString name = QString::fromStdString(path[temp - 1]);
-            std::string name = path[temp];
-            item->setText(1, name.c_str());
-            ui->lightsTree->addTopLevelItem(item);
+            open_image(filename);
         }
-        ui->lightsTree->raise();
-        scene->clear();
-        scene->addPixmap(pixmap);
-        open_image(filename);
-        ui->graphicsView->fitInView(scene->sceneRect(), Qt::KeepAspectRatio);
     }
+    updateTable();
 }
 
 void MainWindow::on_comboBox_currentIndexChanged(int index)
@@ -205,24 +186,9 @@ void MainWindow::on_pushButton_5_clicked()
 void MainWindow::open_image(QString file) {
     LibRaw processor;
     processor.open_file(file.toStdString().c_str());
-    //printf("Image size: %d x %d\n", processor.imgdata.sizes.width, processor.imgdata.sizes.height);
-    //qDebug(file.toStdString().c_str());
-    qDebug("Info: %d", processor.imgdata.idata.make);
-    qDebug("Info: %d", processor.imgdata.other.CameraTemperature);
-
-    processor.unpack();
-
-    qDebug("Image size: %d x %d\n", processor.imgdata.sizes.width, processor.imgdata.sizes.height);
-
-
-    processor.raw2image();
-
-    //printf("Image size: %d x %d\n", processor.imgdata.sizes.width, processor.imgdata.sizes.height);
-    processor.recycle();
 
 
     try {
-        qDebug(file.toStdString().c_str());
         Exiv2::Image::AutoPtr image = Exiv2::ImageFactory::open(file.toStdString().c_str(), sizeof(file.toStdString().c_str()));
         assert(image.get() != 0);
         image->readMetadata();
@@ -241,10 +207,17 @@ void MainWindow::open_image(QString file) {
         QString dateTime = QString::fromStdString(tag.toString());
         tag = exifData["Exif.Photo.ExposureTime"];
         QString exposure = QString::fromStdString(tag.toString());
-        qDebug("ISO: %s", iso.toStdString().c_str());
-        qDebug("Model: %s", model.toStdString().c_str());
-        qDebug("Date/Time: %s", dateTime.toStdString().c_str());
-        qDebug("Exposure: %s", exposure.toStdString().c_str());
+
+        ImageData data;
+        data.setPath(file.toStdString().c_str());
+        data.setCamera(model);
+        data.setISO(iso.toInt());
+        //data.setExposure();
+        data.setDateTime(dateTime);
+        data.setWidth(processor.imgdata.sizes.width);
+        data.setHeight(processor.imgdata.sizes.height);
+
+        images.push_back(data);
 
         /*
          * Exif.Photo.ISOSpeedRatings                   0x8827 Short       1  1600
@@ -256,8 +229,41 @@ void MainWindow::open_image(QString file) {
         //std::cout << "Caught Exiv2 exception '" << e.what() << "'\n";
         qDebug(e.what());
     }
+}
+
+void MainWindow::updateTable() {
+
+    QPixmap pixmap;
+
+    for (int i = 0; i < images.size(); i++) {
+
+        QTreeWidgetItem *item = new QTreeWidgetItem();
+        QString filename = images[i].getPath();
+        std::vector<std::string> path;
+        std::stringstream ss(filename.toStdString().c_str());
+        std::string part;
+        while (std::getline(ss, part, '/')) {
+            path.push_back(part);
+        }
+        int temp = 0;
+        temp = std::count(filename.begin(), filename.end(), '/');
+        //QString name = QString::fromStdString(path[temp - 1]);
+        std::string name = path[temp];
+        item->setText(0, name.c_str());
+
+        item->setText(1, QString::number(images[i].getISO()));
+        item->setText(3, images[i].getDimensions());
+        item->setText(4, images[i].getDateTime());
+        item->setText(5, images[i].getCamera());
 
 
+        ui->lightsTree->addTopLevelItem(item);
 
+        pixmap = QPixmap(filename);
 
+    }
+    ui->lightsTree->raise();
+    scene->clear();
+    scene->addPixmap(pixmap);
+    ui->graphicsView->fitInView(scene->sceneRect(), Qt::KeepAspectRatio);
 }

@@ -6,6 +6,7 @@
 #include <QTreeWidgetItem>
 #include <QGraphicsScene>
 #include <QGraphicsItem>
+#include "imagedata.h"
 
 namespace Ui {
 class MainWindow;
@@ -17,6 +18,7 @@ class MainWindow : public QMainWindow
 
 public:
     explicit MainWindow(QWidget *parent = 0);
+    std::vector<ImageData> images;
     ~MainWindow();
 
 private slots:
@@ -41,6 +43,7 @@ protected:
 
     void open_image(QString filename);
 
+    void updateTable();
 private:
     Ui::MainWindow *ui;
     QGraphicsScene* scene;
