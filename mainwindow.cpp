@@ -116,25 +116,41 @@ void MainWindow::refreshUsedDevice()
 
 void MainWindow::on_lightsTree_itemClicked(QTreeWidgetItem *item, int column)
 {
-    QString filename = item->text(0);
-    QPixmap pixmap(filename);
-    scene->clear();
-    scene->addPixmap(pixmap);
-    ui->graphicsView->ensureVisible(scene->sceneRect());
-    ui->graphicsView->fitInView(scene->itemsBoundingRect(), Qt::KeepAspectRatio);
-}
+    int row;
+    QModelIndex index = ui->lightsTree->currentIndex();
+    row = index.row();
+    QString filename = images[row].getPath();
+    LibRaw processor;
+    processor.open_file(filename.toStdString().c_str());
+    processor.unpack();
+    processor.imgdata.params.no_auto_bright = 1;
+    processor.dcraw_process();
+    libraw_processed_image_t *output = processor.dcraw_make_mem_image();
+    uchar *pixels;
+    int pixelCount = images[row].getWidth() * images[row].getHeight();
+            int colorSize = output->bits / 8;
+            int pixelSize = output->colors * colorSize;
+            pixels = new uchar[pixelCount * 4];
+            uchar *data = output->data;
+            for (int i = 0; i < pixelCount; i++, data += pixelSize) {
+                if (output->colors == 3) {
+                    pixels[i * 4] = data[2 * colorSize];
+                    pixels[i * 4 + 1] = data[1 * colorSize];
+                    pixels[i * 4 + 2] = data[0];
+                } else {
+                    pixels[i * 4] = data[0];
+                    pixels[i * 4 + 1] = data[0];
+                    pixels[i * 4 + 2] = data[0];
+                }
+    }
 
-void MainWindow::on_lightsTree_itemSelectionChanged()
-{
-    QString filename = ui->lightsTree->selectedItems().takeFirst()->text(0);
-    QString test = "test.jpg";
-    QByteArray name(filename.toStdString().c_str());
-    QByteArray output(test.toStdString().c_str());
-    QPixmap pixmap(filename);
+    QImage image(pixels, images[row].getWidth(), images[row].getHeight(), QImage::Format_RGB32);
+    QPixmap pixmap = QPixmap::fromImage(image);
     scene->clear();
     scene->addPixmap(pixmap);
     ui->graphicsView->ensureVisible(scene->sceneRect());
     ui->graphicsView->fitInView(scene->itemsBoundingRect(), Qt::KeepAspectRatio);
+    processor.dcraw_clear_mem(output);
 }
 
 void MainWindow::mouseMoveEvent(QMouseEvent *event)
@@ -187,6 +203,7 @@ void MainWindow::open_image(QString file) {
     LibRaw processor;
     processor.open_file(file.toStdString().c_str());
 
+    qDebug("Temp: %f", processor.imgdata.other.CameraTemperature);
 
     try {
         Exiv2::Image::AutoPtr image = Exiv2::ImageFactory::open(file.toStdString().c_str(), sizeof(file.toStdString().c_str()));
@@ -216,8 +233,25 @@ void MainWindow::open_image(QString file) {
         data.setDateTime(dateTime);
         data.setWidth(processor.imgdata.sizes.width);
         data.setHeight(processor.imgdata.sizes.height);
+        data.setTemp(processor.imgdata.other.CameraTemperature);
 
         images.push_back(data);
+
+        /*Exiv2::ExifData::const_iterator end = exifData.end();
+        for (Exiv2::ExifData::const_iterator i = exifData.begin(); i != end; ++i) {
+            const char* tn = i->typeName();
+            std::cout << std::setw(44) << std::setfill(' ') << std::left
+                      << i->key() << " "
+                      << "0x" << std::setw(4) << std::setfill('0') << std::right
+                      << std::hex << i->tag() << " "
+                      << std::setw(9) << std::setfill(' ') << std::left
+                      << (tn ? tn : "Unknown") << " "
+                      << std::dec << std::setw(3)
+                      << std::setfill(' ') << std::right
+                      << i->count() << "  "
+                      << std::dec << i->value()
+                      << "\n";
+        }*/
 
         /*
          * Exif.Photo.ISOSpeedRatings                   0x8827 Short       1  1600
@@ -232,7 +266,7 @@ void MainWindow::open_image(QString file) {
 }
 
 void MainWindow::updateTable() {
-
+    ui->lightsTree->clear();
     QPixmap pixmap;
 
     for (int i = 0; i < images.size(); i++) {
@@ -255,6 +289,11 @@ void MainWindow::updateTable() {
         item->setText(3, images[i].getDimensions());
         item->setText(4, images[i].getDateTime());
         item->setText(5, images[i].getCamera());
+        ss.clear();
+        ss.str(std::string());
+        ss.precision(2);
+        ss << images[i].getTemp();
+        item->setText(6, QString::fromStdString(ss.str()).append("°C"));
 
 
         ui->lightsTree->addTopLevelItem(item);

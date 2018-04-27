@@ -26,8 +26,6 @@ private slots:
 
     void on_lightsTree_itemClicked(QTreeWidgetItem *item, int column);
 
-    void on_lightsTree_itemSelectionChanged();
-
     void on_tabWidget_tabBarClicked(int index);
 
     void on_comboBox_currentIndexChanged(int index);

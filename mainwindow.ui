@@ -178,11 +178,6 @@
     </property>
     <column>
      <property name="text">
-      <string>Path</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
       <string>Name</string>
      </property>
     </column>
@@ -198,12 +193,22 @@
     </column>
     <column>
      <property name="text">
+      <string>Resolution</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
       <string>Date/Time</string>
      </property>
     </column>
     <column>
      <property name="text">
       <string>Camera</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Temp</string>
      </property>
     </column>
    </widget>
@@ -698,7 +703,7 @@
      <x>0</x>
      <y>0</y>
      <width>1080</width>
-     <height>22</height>
+     <height>20</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuHello">
