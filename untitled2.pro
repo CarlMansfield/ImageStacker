@@ -46,7 +46,7 @@ win32 {
     INCLUDEPATH  +=    d:/dev/tools/exiv2/include \
                        d:/dev/tools/exiv2/bin
     LIBS         += -Ld:/dev/tools/exiv2/lib/ -lexiv2
-
+    RC_ICONS += favicon.ico
 }
 
 INCLUDEPATH += $$PWD/libraw \

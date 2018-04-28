@@ -96,7 +96,7 @@ public:
         pushButton_4->setGeometry(QRect(10, 580, 75, 23));
         label_2 = new QLabel(centralWidget);
         label_2->setObjectName(QStringLiteral("label_2"));
-        label_2->setGeometry(QRect(440, 50, 42, 16));
+        label_2->setGeometry(QRect(400, 0, 42, 16));
         lightsTree = new QTreeWidget(centralWidget);
         lightsTree->setObjectName(QStringLiteral("lightsTree"));
         lightsTree->setEnabled(true);
@@ -156,7 +156,7 @@ public:
         biasTree->setMinimumSize(QSize(259, 192));
         graphicsView = new QGraphicsView(centralWidget);
         graphicsView->setObjectName(QStringLiteral("graphicsView"));
-        graphicsView->setGeometry(QRect(440, 70, 591, 341));
+        graphicsView->setGeometry(QRect(400, 20, 661, 401));
         sizePolicy.setHeightForWidth(graphicsView->sizePolicy().hasHeightForWidth());
         graphicsView->setSizePolicy(sizePolicy);
         graphicsView->setFrameShadow(QFrame::Raised);

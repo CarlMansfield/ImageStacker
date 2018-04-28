@@ -128,20 +128,22 @@ void MainWindow::on_lightsTree_itemClicked(QTreeWidgetItem *item, int column)
     libraw_processed_image_t *output = processor.dcraw_make_mem_image();
     uchar *pixels;
     int pixelCount = images[row].getWidth() * images[row].getHeight();
-            int colorSize = output->bits / 8;
-            int pixelSize = output->colors * colorSize;
-            pixels = new uchar[pixelCount * 4];
-            uchar *data = output->data;
-            for (int i = 0; i < pixelCount; i++, data += pixelSize) {
-                if (output->colors == 3) {
-                    pixels[i * 4] = data[2 * colorSize];
-                    pixels[i * 4 + 1] = data[1 * colorSize];
-                    pixels[i * 4 + 2] = data[0];
-                } else {
-                    pixels[i * 4] = data[0];
-                    pixels[i * 4 + 1] = data[0];
-                    pixels[i * 4 + 2] = data[0];
-                }
+    int colorSize = output->bits / 8;
+    qDebug(QString::number(colorSize).toStdString().c_str());
+    int pixelSize = output->colors * colorSize;
+    qDebug(QString::number(pixelSize).toStdString().c_str());
+    pixels = new uchar[pixelCount * 4];
+    uchar *data = output->data;
+    for (int i = 0; i < pixelCount; i++, data += pixelSize) {
+        if (output->colors == 3) {
+            pixels[i * 4] = data[2 * colorSize];
+            pixels[i * 4 + 1] = data[1 * colorSize];
+            pixels[i * 4 + 2] = data[0];
+        } else {
+            pixels[i * 4] = data[0];
+            pixels[i * 4 + 1] = data[0];
+            pixels[i * 4 + 2] = data[0];
+        }
     }
 
     QImage image(pixels, images[row].getWidth(), images[row].getHeight(), QImage::Format_RGB32);
