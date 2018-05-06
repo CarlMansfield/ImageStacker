@@ -14,6 +14,7 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QComboBox>
+#include <QtWidgets/QFormLayout>
 #include <QtWidgets/QGraphicsView>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
@@ -21,6 +22,7 @@
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QSlider>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTabWidget>
 #include <QtWidgets/QTreeWidget>
@@ -52,6 +54,11 @@ public:
     QComboBox *comboBox;
     QComboBox *comboBox_2;
     QPushButton *pushButton_5;
+    QWidget *verticalLayoutWidget;
+    QFormLayout *formLayout;
+    QPushButton *buttonReg;
+    QLabel *label;
+    QSlider *horizontalSlider;
     QMenuBar *menuBar;
     QMenu *menuHello;
     QStatusBar *statusBar;
@@ -201,6 +208,41 @@ public:
         pushButton_5 = new QPushButton(centralWidget);
         pushButton_5->setObjectName(QStringLiteral("pushButton_5"));
         pushButton_5->setGeometry(QRect(10, 620, 75, 23));
+        verticalLayoutWidget = new QWidget(centralWidget);
+        verticalLayoutWidget->setObjectName(QStringLiteral("verticalLayoutWidget"));
+        verticalLayoutWidget->setGeometry(QRect(10, 10, 95, 63));
+        formLayout = new QFormLayout(verticalLayoutWidget);
+        formLayout->setSpacing(6);
+        formLayout->setContentsMargins(11, 11, 11, 11);
+        formLayout->setObjectName(QStringLiteral("formLayout"));
+        formLayout->setContentsMargins(0, 0, 0, 0);
+        buttonReg = new QPushButton(verticalLayoutWidget);
+        buttonReg->setObjectName(QStringLiteral("buttonReg"));
+        QSizePolicy sizePolicy2(QSizePolicy::Minimum, QSizePolicy::Maximum);
+        sizePolicy2.setHorizontalStretch(0);
+        sizePolicy2.setVerticalStretch(0);
+        sizePolicy2.setHeightForWidth(buttonReg->sizePolicy().hasHeightForWidth());
+        buttonReg->setSizePolicy(sizePolicy2);
+
+        formLayout->setWidget(0, QFormLayout::LabelRole, buttonReg);
+
+        label = new QLabel(verticalLayoutWidget);
+        label->setObjectName(QStringLiteral("label"));
+        QSizePolicy sizePolicy3(QSizePolicy::Fixed, QSizePolicy::Maximum);
+        sizePolicy3.setHorizontalStretch(0);
+        sizePolicy3.setVerticalStretch(0);
+        sizePolicy3.setHeightForWidth(label->sizePolicy().hasHeightForWidth());
+        label->setSizePolicy(sizePolicy3);
+
+        formLayout->setWidget(1, QFormLayout::LabelRole, label);
+
+        horizontalSlider = new QSlider(verticalLayoutWidget);
+        horizontalSlider->setObjectName(QStringLiteral("horizontalSlider"));
+        horizontalSlider->setValue(30);
+        horizontalSlider->setOrientation(Qt::Horizontal);
+
+        formLayout->setWidget(2, QFormLayout::LabelRole, horizontalSlider);
+
         MainWindow->setCentralWidget(centralWidget);
         graphicsView_2->raise();
         tabWidget->raise();
@@ -218,6 +260,7 @@ public:
         comboBox->raise();
         comboBox_2->raise();
         pushButton_5->raise();
+        verticalLayoutWidget->raise();
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
         menuBar->setGeometry(QRect(0, 0, 1080, 20));
@@ -281,6 +324,11 @@ public:
         ___qtreewidgetitem3->setText(0, QApplication::translate("MainWindow", "Path", Q_NULLPTR));
         platform->setText(QApplication::translate("MainWindow", "TextLabel", Q_NULLPTR));
         pushButton_5->setText(QApplication::translate("MainWindow", "Directory", Q_NULLPTR));
+        buttonReg->setText(QApplication::translate("MainWindow", "Register", Q_NULLPTR));
+        label->setText(QApplication::translate("MainWindow", "Star threshold: 30", Q_NULLPTR));
+#ifndef QT_NO_TOOLTIP
+        horizontalSlider->setToolTip(QApplication::translate("MainWindow", "<html><head/><body><p>Adjust threshold until 10-20 stars are visible</p></body></html>", Q_NULLPTR));
+#endif // QT_NO_TOOLTIP
         menuHello->setTitle(QApplication::translate("MainWindow", "Hello", Q_NULLPTR));
     } // retranslateUi
 

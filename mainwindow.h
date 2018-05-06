@@ -36,6 +36,8 @@ private slots:
 
     void on_pushButton_5_clicked();
 
+    void on_horizontalSlider_sliderMoved(int position);
+
 protected:
     void mouseMoveEvent(QMouseEvent * event);
 

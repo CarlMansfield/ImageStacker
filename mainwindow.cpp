@@ -25,13 +25,17 @@ cl::Platform current_platform;
 cl::Device temp_device;
 cl::Device current_device;
 QString defaultDir;
+uchar* previewData;
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    //ui->label_2->setPalette(QPalette::Light);
+    QPalette palette;
+    palette.setColor(QPalette::WindowText, Qt::white);
+    ui->label_2->setPalette(palette);
+    ui->label->setPalette(palette);
     this->setFixedSize(this->maximumSize());
     ui->lightsTree->setContextMenuPolicy(Qt::ActionsContextMenu);
     QAction* removeAction;
@@ -120,7 +124,7 @@ void MainWindow::on_lightsTree_itemClicked(QTreeWidgetItem *item, int column)
     QModelIndex index = ui->lightsTree->currentIndex();
     row = index.row();
     QString filename = images[row].getPath();
-    LibRaw processor;
+    /*LibRaw processor;
     processor.open_file(filename.toStdString().c_str());
     processor.unpack();
     processor.imgdata.params.no_auto_bright = 1;
@@ -144,15 +148,15 @@ void MainWindow::on_lightsTree_itemClicked(QTreeWidgetItem *item, int column)
             pixels[i * 4 + 1] = data[0];
             pixels[i * 4 + 2] = data[0];
         }
-    }
+    }*/
 
-    QImage image(pixels, images[row].getWidth(), images[row].getHeight(), QImage::Format_RGB32);
+    previewData = ImageData::loadFromFile(filename, images[row].getWidth(), images[row].getHeight());
+    QImage image(previewData, images[row].getWidth(), images[row].getHeight(), QImage::Format_RGB32);
     QPixmap pixmap = QPixmap::fromImage(image);
     scene->clear();
     scene->addPixmap(pixmap);
     ui->graphicsView->ensureVisible(scene->sceneRect());
     ui->graphicsView->fitInView(scene->itemsBoundingRect(), Qt::KeepAspectRatio);
-    processor.dcraw_clear_mem(output);
 }
 
 void MainWindow::mouseMoveEvent(QMouseEvent *event)
@@ -307,4 +311,9 @@ void MainWindow::updateTable() {
     scene->clear();
     scene->addPixmap(pixmap);
     ui->graphicsView->fitInView(scene->sceneRect(), Qt::KeepAspectRatio);
+}
+
+void MainWindow::on_horizontalSlider_sliderMoved(int position)
+{
+    ui->label->setText("Star threshold: " + QString::number(position));
 }

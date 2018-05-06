@@ -1,6 +1,9 @@
 #ifndef IMAGEDATA_H
 #define IMAGEDATA_H
 #include <QString>
+#include <QImage>
+#include <libraw/libraw.h>
+#include <exiv2/exiv2.hpp>
 
 class ImageData
 {
@@ -23,6 +26,7 @@ public:
     float getTemp() {return temperature;}
     QString getDateTime(){return dateTime;}
     QString getDimensions();
+    static uchar* loadFromFile(QString filename, int width, int height);
 private:
     QString file;
     QString model;
