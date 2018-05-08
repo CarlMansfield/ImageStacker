@@ -14,9 +14,11 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     imagedata.cpp \
+    imagetools.cpp
 
 HEADERS  += mainwindow.h \
     imagedata.h \
+    imagetools.h
 
 FORMS    += mainwindow.ui
 
@@ -43,7 +45,11 @@ win32: LIBS += -L$$PWD/libraw/lib/ -llibraw
 win32 {
     INCLUDEPATH  +=    d:/dev/tools/exiv2/include \
                        d:/dev/tools/exiv2/bin
-    LIBS         += -Ld:/dev/tools/exiv2/lib/ -lexiv2
+
+    INCLUDEPATH += d:/dev/tools/opencv/build/include
+
+    LIBS         += -Ld:/dev/tools/exiv2/lib/ -lexiv2 \
+                    -Ld:/dev/tools/opencv/build/x64/vc15/lib -lopencv_world341
     RC_ICONS += favicon.ico
 }
 

@@ -59,6 +59,7 @@ public:
     QPushButton *buttonReg;
     QLabel *label;
     QSlider *horizontalSlider;
+    QLabel *label_3;
     QMenuBar *menuBar;
     QMenu *menuHello;
     QStatusBar *statusBar;
@@ -236,13 +237,15 @@ public:
 
         formLayout->setWidget(1, QFormLayout::LabelRole, label);
 
-        horizontalSlider = new QSlider(verticalLayoutWidget);
+        horizontalSlider = new QSlider(centralWidget);
         horizontalSlider->setObjectName(QStringLiteral("horizontalSlider"));
-        horizontalSlider->setValue(30);
+        horizontalSlider->setGeometry(QRect(920, 0, 84, 15));
+        horizontalSlider->setMaximum(100);
+        horizontalSlider->setValue(50);
         horizontalSlider->setOrientation(Qt::Horizontal);
-
-        formLayout->setWidget(2, QFormLayout::LabelRole, horizontalSlider);
-
+        label_3 = new QLabel(centralWidget);
+        label_3->setObjectName(QStringLiteral("label_3"));
+        label_3->setGeometry(QRect(860, 0, 61, 16));
         MainWindow->setCentralWidget(centralWidget);
         graphicsView_2->raise();
         tabWidget->raise();
@@ -261,6 +264,8 @@ public:
         comboBox_2->raise();
         pushButton_5->raise();
         verticalLayoutWidget->raise();
+        horizontalSlider->raise();
+        label_3->raise();
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
         menuBar->setGeometry(QRect(0, 0, 1080, 20));
@@ -325,10 +330,11 @@ public:
         platform->setText(QApplication::translate("MainWindow", "TextLabel", Q_NULLPTR));
         pushButton_5->setText(QApplication::translate("MainWindow", "Directory", Q_NULLPTR));
         buttonReg->setText(QApplication::translate("MainWindow", "Register", Q_NULLPTR));
-        label->setText(QApplication::translate("MainWindow", "Star threshold: 30", Q_NULLPTR));
+        label->setText(QApplication::translate("MainWindow", "Star threshold: 50", Q_NULLPTR));
 #ifndef QT_NO_TOOLTIP
         horizontalSlider->setToolTip(QApplication::translate("MainWindow", "<html><head/><body><p>Adjust threshold until 10-20 stars are visible</p></body></html>", Q_NULLPTR));
 #endif // QT_NO_TOOLTIP
+        label_3->setText(QApplication::translate("MainWindow", "Brightness", Q_NULLPTR));
         menuHello->setTitle(QApplication::translate("MainWindow", "Hello", Q_NULLPTR));
     } // retranslateUi
 

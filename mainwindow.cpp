@@ -25,7 +25,7 @@ cl::Platform current_platform;
 cl::Device temp_device;
 cl::Device current_device;
 QString defaultDir;
-uchar* previewData;
+ImageData previewData;
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -36,6 +36,7 @@ MainWindow::MainWindow(QWidget *parent) :
     palette.setColor(QPalette::WindowText, Qt::white);
     ui->label_2->setPalette(palette);
     ui->label->setPalette(palette);
+    ui->label_3->setPalette(palette);
     this->setFixedSize(this->maximumSize());
     ui->lightsTree->setContextMenuPolicy(Qt::ActionsContextMenu);
     QAction* removeAction;
@@ -120,6 +121,7 @@ void MainWindow::refreshUsedDevice()
 
 void MainWindow::on_lightsTree_itemClicked(QTreeWidgetItem *item, int column)
 {
+    previewData.clear();
     int row;
     QModelIndex index = ui->lightsTree->currentIndex();
     row = index.row();
@@ -149,9 +151,27 @@ void MainWindow::on_lightsTree_itemClicked(QTreeWidgetItem *item, int column)
             pixels[i * 4 + 2] = data[0];
         }
     }*/
+    previewData = images[row];
+    qDebug("Testststst");
+    previewData.data = previewData.loadFromFile();
+    qDebug("Loaded successfully");
+    display_preview();
+    std::cout << &previewData << std::endl;
+}
 
-    previewData = ImageData::loadFromFile(filename, images[row].getWidth(), images[row].getHeight());
-    QImage image(previewData, images[row].getWidth(), images[row].getHeight(), QImage::Format_RGB32);
+void MainWindow::display_preview()
+{
+    QImage image(previewData.data, previewData.getWidth(), previewData.getHeight(), QImage::Format_RGB32);
+    QPixmap pixmap = QPixmap::fromImage(image);
+    scene->clear();
+    scene->addPixmap(pixmap);
+    ui->graphicsView->ensureVisible(scene->sceneRect());
+    ui->graphicsView->fitInView(scene->itemsBoundingRect(), Qt::KeepAspectRatio);
+}
+
+void MainWindow::display_changed_brightness(uchar* data)
+{
+    QImage image(data, previewData.getWidth(), previewData.getHeight(), QImage::Format_RGB32);
     QPixmap pixmap = QPixmap::fromImage(image);
     scene->clear();
     scene->addPixmap(pixmap);
@@ -242,7 +262,6 @@ void MainWindow::open_image(QString file) {
         data.setTemp(processor.imgdata.other.CameraTemperature);
 
         images.push_back(data);
-
         /*Exiv2::ExifData::const_iterator end = exifData.end();
         for (Exiv2::ExifData::const_iterator i = exifData.begin(); i != end; ++i) {
             const char* tn = i->typeName();
@@ -316,4 +335,10 @@ void MainWindow::updateTable() {
 void MainWindow::on_horizontalSlider_sliderMoved(int position)
 {
     ui->label->setText("Star threshold: " + QString::number(position));
+    tempData = new uchar[(previewData.getWidth() * previewData.getHeight()) * 4];
+    ImageTools::increaseBrightness(previewData, position-50, tempData);
+    display_changed_brightness(tempData);
+    qDebug("before delete");
+    //delete[] tempData;
+    qDebug("after delete");
 }

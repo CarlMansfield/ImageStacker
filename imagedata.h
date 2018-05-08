@@ -9,6 +9,11 @@ class ImageData
 {
 public:
     ImageData();
+    ImageData(const ImageData &image);
+    ~ImageData();
+    void clear();
+    uchar* data;
+    uchar* pixels;
     void setPath(QString file) {this->file = file;}
     void setCamera(QString model) {this->model = model;}
     void setISO(int iso) {this->iso = iso;}
@@ -17,16 +22,16 @@ public:
     void setWidth(int width) {this->width = width;}
     void setHeight(int height) {this->height = height;}
     void setTemp(float temp) {this->temperature = temp;}
-    QString getPath(){return file;}
-    QString getCamera(){return model;}
-    int getISO(){return iso;}
-    int getHeight(){return height;}
-    int getWidth(){return width;}
-    int getExposure(){return exposure;}
-    float getTemp() {return temperature;}
-    QString getDateTime(){return dateTime;}
+    QString getPath() const {return file;}
+    QString getCamera() const {return model;}
+    int getISO() const {return iso;}
+    int getHeight() const {return height;}
+    int getWidth() const {return width;}
+    int getExposure() const {return exposure;}
+    float getTemp() const  {return temperature;}
+    QString getDateTime() const {return dateTime;}
     QString getDimensions();
-    static uchar* loadFromFile(QString filename, int width, int height);
+    uchar* loadFromFile();
 private:
     QString file;
     QString model;

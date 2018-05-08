@@ -7,6 +7,7 @@
 #include <QGraphicsScene>
 #include <QGraphicsItem>
 #include "imagedata.h"
+#include "imagetools.h"
 
 namespace Ui {
 class MainWindow;
@@ -44,11 +45,16 @@ protected:
     void open_image(QString filename);
 
     void updateTable();
+
+    void display_preview();
+
+    void display_changed_brightness(uchar* data);
 private:
     Ui::MainWindow *ui;
     QGraphicsScene* scene;
     QGraphicsItem* item;
     QAction *myAction;
+    uchar* tempData;
 };
 
 #endif // MAINWINDOW_H
