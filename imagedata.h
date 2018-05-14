@@ -12,8 +12,8 @@ public:
     ImageData(const ImageData &image);
     ~ImageData();
     void clear();
-    uchar* data;
-    uchar* pixels;
+    uchar* data = nullptr;
+    uchar* pixels = nullptr;
     void setPath(QString file) {this->file = file;}
     void setCamera(QString model) {this->model = model;}
     void setISO(int iso) {this->iso = iso;}

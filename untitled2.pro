@@ -37,7 +37,8 @@ INCLUDEPATH += $$PWD/../../../../usr/local/include
 DEPENDPATH += $$PWD/../../../../usr/local/include
 
 LIBS += $$PWD/../../../../usr/local/lib/libraw.dylib\
-        $$PWD/../../../../usr/local/lib/libexiv2.dylib
+        $$PWD/../../../../usr/local/lib/libexiv2.dylib\
+        $$PWD/../../../../usr/local/lib/libopencv_core.3.4.1.dylib
 }
 
 win32: LIBS += -L$$PWD/libraw/lib/ -llibraw

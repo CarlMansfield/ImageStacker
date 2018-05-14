@@ -32,6 +32,12 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    QCoreApplication::setApplicationName("CarlSoftware");
+    QCoreApplication::setOrganizationName("ImageStacker");
+    QVariant value = defaultSettings.value("path");
+    if (value.type() == QVariant::String) {
+        defaultDir = value.toString();
+    }
     QPalette palette;
     palette.setColor(QPalette::WindowText, Qt::white);
     ui->label_2->setPalette(palette);
@@ -217,11 +223,9 @@ void MainWindow::on_pushButton_5_clicked()
     dialog.setFileMode(QFileDialog::Directory);
     QString folder;
 
+    QSettings settings("ImageStacker", "CarlSoftware");
     folder = QFileDialog::getExistingDirectory(0, ("Select default directory"), QDir::currentPath());
-
-
-
-    defaultDir = folder;
+    settings.setValue("path", folder);
 }
 
 
@@ -339,6 +343,6 @@ void MainWindow::on_horizontalSlider_sliderMoved(int position)
     ImageTools::increaseBrightness(previewData, position-50, tempData);
     display_changed_brightness(tempData);
     qDebug("before delete");
-    //delete[] tempData;
+    delete[] tempData;
     qDebug("after delete");
 }

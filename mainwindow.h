@@ -6,6 +6,7 @@
 #include <QTreeWidgetItem>
 #include <QGraphicsScene>
 #include <QGraphicsItem>
+#include <QSettings>
 #include "imagedata.h"
 #include "imagetools.h"
 
@@ -54,7 +55,8 @@ private:
     QGraphicsScene* scene;
     QGraphicsItem* item;
     QAction *myAction;
-    uchar* tempData;
+    uchar* tempData = nullptr;
+    QSettings defaultSettings;
 };
 
 #endif // MAINWINDOW_H
