@@ -98,6 +98,8 @@ void MainWindow::on_pushButton_clicked()
         }
     }
     updateTable();
+    previewData.data = previewData.loadFromFile();
+    display_changed_brightness();
 }
 
 void MainWindow::on_comboBox_currentIndexChanged(int index)
@@ -161,7 +163,7 @@ void MainWindow::on_lightsTree_itemClicked(QTreeWidgetItem *item, int column)
     qDebug("Testststst");
     previewData.data = previewData.loadFromFile();
     qDebug("Loaded successfully");
-    display_preview();
+    display_changed_brightness();
     std::cout << &previewData << std::endl;
 }
 
@@ -175,9 +177,10 @@ void MainWindow::display_preview()
     ui->graphicsView->fitInView(scene->itemsBoundingRect(), Qt::KeepAspectRatio);
 }
 
-void MainWindow::display_changed_brightness(uchar* data)
+void MainWindow::display_changed_brightness()
 {
-    QImage image(data, previewData.getWidth(), previewData.getHeight(), QImage::Format_RGB32);
+    tempImage = ImageTools::increaseBrightness(previewData, ui->horizontalSlider->value()-50);
+    QImage image(tempImage.data, previewData.getWidth(), previewData.getHeight(), QImage::Format_RGB32);
     QPixmap pixmap = QPixmap::fromImage(image);
     scene->clear();
     scene->addPixmap(pixmap);
@@ -234,7 +237,7 @@ void MainWindow::open_image(QString file) {
     processor.open_file(file.toStdString().c_str());
 
     qDebug("Temp: %f", processor.imgdata.other.CameraTemperature);
-
+    ImageData data;
     try {
         Exiv2::Image::AutoPtr image = Exiv2::ImageFactory::open(file.toStdString().c_str(), sizeof(file.toStdString().c_str()));
         assert(image.get() != 0);
@@ -255,7 +258,7 @@ void MainWindow::open_image(QString file) {
         tag = exifData["Exif.Photo.ExposureTime"];
         QString exposure = QString::fromStdString(tag.toString());
 
-        ImageData data;
+
         data.setPath(file.toStdString().c_str());
         data.setCamera(model);
         data.setISO(iso.toInt());
@@ -292,6 +295,7 @@ void MainWindow::open_image(QString file) {
         //std::cout << "Caught Exiv2 exception '" << e.what() << "'\n";
         qDebug(e.what());
     }
+    previewData = data;
 }
 
 void MainWindow::updateTable() {
@@ -331,18 +335,11 @@ void MainWindow::updateTable() {
 
     }
     ui->lightsTree->raise();
-    scene->clear();
-    scene->addPixmap(pixmap);
-    ui->graphicsView->fitInView(scene->sceneRect(), Qt::KeepAspectRatio);
 }
 
 void MainWindow::on_horizontalSlider_sliderMoved(int position)
 {
     ui->label->setText("Star threshold: " + QString::number(position));
-    tempData = new uchar[(previewData.getWidth() * previewData.getHeight()) * 4];
-    ImageTools::increaseBrightness(previewData, position-50, tempData);
-    display_changed_brightness(tempData);
-    qDebug("before delete");
-    delete[] tempData;
-    qDebug("after delete");
+    tempImage = ImageTools::increaseBrightness(previewData, position-50);
+    display_changed_brightness();
 }

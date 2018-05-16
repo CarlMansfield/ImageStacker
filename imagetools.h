@@ -10,7 +10,7 @@ class ImageTools
 {
 public:
     ImageTools();
-    static void increaseBrightness(ImageData& image, int value, uchar* temp);
+    static cv::Mat increaseBrightness(ImageData& image, int value);
 };
 
 #endif // IMAGETOOLS_H

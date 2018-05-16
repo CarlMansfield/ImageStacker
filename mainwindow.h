@@ -49,12 +49,13 @@ protected:
 
     void display_preview();
 
-    void display_changed_brightness(uchar* data);
+    void display_changed_brightness();
 private:
     Ui::MainWindow *ui;
     QGraphicsScene* scene;
     QGraphicsItem* item;
     QAction *myAction;
+    cv::Mat tempImage;
     uchar* tempData = nullptr;
     QSettings defaultSettings;
 };
