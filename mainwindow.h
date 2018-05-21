@@ -9,6 +9,7 @@
 #include <QSettings>
 #include "imagedata.h"
 #include "imagetools.h"
+#include "stardetection.h"
 
 namespace Ui {
 class MainWindow;
@@ -40,6 +41,12 @@ private slots:
 
     void on_horizontalSlider_sliderMoved(int position);
 
+    void on_buttonReg_clicked();
+
+    void on_pushButton_6_pressed();
+
+    void on_pushButton_6_released();
+
 protected:
     void mouseMoveEvent(QMouseEvent * event);
 
@@ -56,6 +63,7 @@ private:
     QGraphicsItem* item;
     QAction *myAction;
     cv::Mat tempImage;
+    cv::Mat starsDetected;
     uchar* tempData = nullptr;
     QSettings defaultSettings;
 };

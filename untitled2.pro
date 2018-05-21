@@ -14,11 +14,13 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     imagedata.cpp \
-    imagetools.cpp
+    imagetools.cpp \
+    stardetection.cpp
 
 HEADERS  += mainwindow.h \
     imagedata.h \
-    imagetools.h
+    imagetools.h \
+    stardetection.h
 
 FORMS    += mainwindow.ui
 

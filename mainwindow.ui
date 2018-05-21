@@ -753,6 +753,19 @@
      <string>Brightness</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="pushButton_6">
+    <property name="geometry">
+     <rect>
+      <x>720</x>
+      <y>0</y>
+      <width>80</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Show stars</string>
+    </property>
+   </widget>
    <zorder>graphicsView_2</zorder>
    <zorder>tabWidget</zorder>
    <zorder>pushButton</zorder>
@@ -772,6 +785,7 @@
    <zorder>verticalLayoutWidget</zorder>
    <zorder>horizontalSlider</zorder>
    <zorder>label_3</zorder>
+   <zorder>pushButton_6</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">

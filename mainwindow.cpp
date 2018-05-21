@@ -343,3 +343,25 @@ void MainWindow::on_horizontalSlider_sliderMoved(int position)
     tempImage = ImageTools::increaseBrightness(previewData, position-50);
     display_changed_brightness();
 }
+
+void MainWindow::on_buttonReg_clicked()
+{
+    StarDetection detector;
+    starsDetected = detector.detectStars(tempImage);
+
+}
+
+void MainWindow::on_pushButton_6_pressed()
+{
+    QImage image(starsDetected.data, previewData.getWidth(), previewData.getHeight(), QImage::Format_RGB32);
+    QPixmap pixmap = QPixmap::fromImage(image);
+    scene->clear();
+    scene->addPixmap(pixmap);
+    ui->graphicsView->ensureVisible(scene->sceneRect());
+    ui->graphicsView->fitInView(scene->itemsBoundingRect(), Qt::KeepAspectRatio);
+}
+
+void MainWindow::on_pushButton_6_released()
+{
+    display_changed_brightness();
+}

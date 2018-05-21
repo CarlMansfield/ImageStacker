@@ -60,6 +60,7 @@ public:
     QLabel *label;
     QSlider *horizontalSlider;
     QLabel *label_3;
+    QPushButton *pushButton_6;
     QMenuBar *menuBar;
     QMenu *menuHello;
     QStatusBar *statusBar;
@@ -246,6 +247,9 @@ public:
         label_3 = new QLabel(centralWidget);
         label_3->setObjectName(QStringLiteral("label_3"));
         label_3->setGeometry(QRect(840, 0, 81, 20));
+        pushButton_6 = new QPushButton(centralWidget);
+        pushButton_6->setObjectName(QStringLiteral("pushButton_6"));
+        pushButton_6->setGeometry(QRect(720, 0, 80, 21));
         MainWindow->setCentralWidget(centralWidget);
         graphicsView_2->raise();
         tabWidget->raise();
@@ -266,6 +270,7 @@ public:
         verticalLayoutWidget->raise();
         horizontalSlider->raise();
         label_3->raise();
+        pushButton_6->raise();
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
         menuBar->setGeometry(QRect(0, 0, 1080, 20));
@@ -335,6 +340,7 @@ public:
         horizontalSlider->setToolTip(QApplication::translate("MainWindow", "<html><head/><body><p>Adjust threshold until 10-20 stars are visible</p></body></html>", Q_NULLPTR));
 #endif // QT_NO_TOOLTIP
         label_3->setText(QApplication::translate("MainWindow", "Brightness", Q_NULLPTR));
+        pushButton_6->setText(QApplication::translate("MainWindow", "Show stars", Q_NULLPTR));
         menuHello->setTitle(QApplication::translate("MainWindow", "Hello", Q_NULLPTR));
     } // retranslateUi
 
