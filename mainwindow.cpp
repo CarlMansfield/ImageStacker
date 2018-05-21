@@ -353,7 +353,7 @@ void MainWindow::on_buttonReg_clicked()
 
 void MainWindow::on_pushButton_6_pressed()
 {
-    QImage image(starsDetected.data, previewData.getWidth(), previewData.getHeight(), QImage::Format_RGB32);
+    QImage image(starsDetected.data, previewData.getWidth(), previewData.getHeight(), QImage::Format_RGB16);
     QPixmap pixmap = QPixmap::fromImage(image);
     scene->clear();
     scene->addPixmap(pixmap);

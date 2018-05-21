@@ -46,8 +46,5 @@ cv::Mat StarDetection::detectStars(cv::Mat inputImage)
         cv::circle(drawnCircles, center, radius, cv::Scalar(255, 0, 255), 2, cv::LINE_AA);
     }
 
-
-    cv::imshow("Stars", drawnCircles);
-    cvWaitKey(0);
     return drawnCircles;
 }
