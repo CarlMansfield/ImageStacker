@@ -43,6 +43,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->label_2->setPalette(palette);
     ui->label->setPalette(palette);
     ui->label_3->setPalette(palette);
+    ui->ramLabel->setPalette(palette);
     this->setFixedSize(this->maximumSize());
     ui->lightsTree->setContextMenuPolicy(Qt::ActionsContextMenu);
     QAction* removeAction;
@@ -76,6 +77,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
         ui->platform->setText(QString::fromStdString(s));
     }
+    ui->ramLabel->setText("RAM usage: ");
 }
 
 MainWindow::~MainWindow()
@@ -257,13 +259,14 @@ void MainWindow::open_image(QString file) {
         QString dateTime = QString::fromStdString(tag.toString());
         tag = exifData["Exif.Photo.ExposureTime"];
         QString exposure = QString::fromStdString(tag.toString());
-
+        qDebug() << exposure;
 
         data.setPath(file.toStdString().c_str());
         data.setCamera(model);
         data.setISO(iso.toInt());
         //data.setExposure();
         data.setDateTime(dateTime);
+        data.setExposure(exposure);
         data.setWidth(processor.imgdata.sizes.width);
         data.setHeight(processor.imgdata.sizes.height);
         data.setTemp(processor.imgdata.other.CameraTemperature);
@@ -319,6 +322,8 @@ void MainWindow::updateTable() {
         item->setText(0, name.c_str());
 
         item->setText(1, QString::number(images[i].getISO()));
+        item->setText(2, images[i].getExposure());
+        qDebug() << images[i].getExposure();
         item->setText(3, images[i].getDimensions());
         item->setText(4, images[i].getDateTime());
         item->setText(5, images[i].getCamera());
@@ -354,6 +359,7 @@ void MainWindow::on_buttonReg_clicked()
 void MainWindow::on_pushButton_6_pressed()
 {
     QImage image(starsDetected.data, previewData.getWidth(), previewData.getHeight(), QImage::Format_RGB16);
+    qDebug() << "after conversion";
     QPixmap pixmap = QPixmap::fromImage(image);
     scene->clear();
     scene->addPixmap(pixmap);
@@ -364,4 +370,13 @@ void MainWindow::on_pushButton_6_pressed()
 void MainWindow::on_pushButton_6_released()
 {
     display_changed_brightness();
+}
+
+void MainWindow::getRamUsage()
+{
+    /*MEMORYSTATUSEX statex;
+    statex.dwLength = sizeof(statex);
+    GlobalMemoryStatus(&statex);
+
+    qDebug() << "Memory usage: %*ld"*/
 }

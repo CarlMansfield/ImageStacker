@@ -61,6 +61,7 @@ public:
     QSlider *horizontalSlider;
     QLabel *label_3;
     QPushButton *pushButton_6;
+    QLabel *ramLabel;
     QMenuBar *menuBar;
     QMenu *menuHello;
     QStatusBar *statusBar;
@@ -250,6 +251,9 @@ public:
         pushButton_6 = new QPushButton(centralWidget);
         pushButton_6->setObjectName(QStringLiteral("pushButton_6"));
         pushButton_6->setGeometry(QRect(720, 0, 80, 21));
+        ramLabel = new QLabel(centralWidget);
+        ramLabel->setObjectName(QStringLiteral("ramLabel"));
+        ramLabel->setGeometry(QRect(10, 660, 47, 13));
         MainWindow->setCentralWidget(centralWidget);
         graphicsView_2->raise();
         tabWidget->raise();
@@ -271,6 +275,7 @@ public:
         horizontalSlider->raise();
         label_3->raise();
         pushButton_6->raise();
+        ramLabel->raise();
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
         menuBar->setGeometry(QRect(0, 0, 1080, 20));
@@ -341,6 +346,7 @@ public:
 #endif // QT_NO_TOOLTIP
         label_3->setText(QApplication::translate("MainWindow", "Brightness", Q_NULLPTR));
         pushButton_6->setText(QApplication::translate("MainWindow", "Show stars", Q_NULLPTR));
+        ramLabel->setText(QApplication::translate("MainWindow", "TextLabel", Q_NULLPTR));
         menuHello->setTitle(QApplication::translate("MainWindow", "Hello", Q_NULLPTR));
     } // retranslateUi
 

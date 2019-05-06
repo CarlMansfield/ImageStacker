@@ -57,6 +57,9 @@ protected:
     void display_preview();
 
     void display_changed_brightness();
+
+    void getRamUsage();
+
 private:
     Ui::MainWindow *ui;
     QGraphicsScene* scene;

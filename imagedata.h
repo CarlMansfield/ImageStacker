@@ -17,7 +17,7 @@ public:
     void setPath(QString file) {this->file = file;}
     void setCamera(QString model) {this->model = model;}
     void setISO(int iso) {this->iso = iso;}
-    void setExposure(int exposure) {this->exposure = exposure;}
+    void setExposure(QString exposure) {this->exposure = exposure;}
     void setDateTime(QString dateTime) {this->dateTime = dateTime;}
     void setWidth(int width) {this->width = width;}
     void setHeight(int height) {this->height = height;}
@@ -27,7 +27,7 @@ public:
     int getISO() const {return iso;}
     int getHeight() const {return height;}
     int getWidth() const {return width;}
-    int getExposure() const {return exposure;}
+    QString getExposure() const {return exposure;}
     float getTemp() const  {return temperature;}
     QString getDateTime() const {return dateTime;}
     QString getDimensions();
@@ -36,7 +36,7 @@ private:
     QString file;
     QString model;
     int iso;
-    int exposure;
+    QString exposure;
     QString dateTime;
     int width;
     int height;

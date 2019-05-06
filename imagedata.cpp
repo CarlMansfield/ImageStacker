@@ -15,6 +15,7 @@ ImageData::ImageData(const ImageData &image)
     this->iso = image.getISO();
     this->temperature = image.getTemp();
     this->data = image.data;
+    this->exposure = image.getExposure();
 }
 
 ImageData::~ImageData()
