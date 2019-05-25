@@ -12,7 +12,7 @@ public:
     StarDetection();
 
     cv::Mat getBackground(cv::Mat inputImage);
-    cv::Mat detectStars(cv::Mat inputImage);
+    cv::Mat detectStars(cv::Mat inputImage, std::vector<std::vector<cv::Point>> &contours, std::vector<cv::Vec4i> &hierarchy);
 };
 
 #endif // STARDETECTION_H

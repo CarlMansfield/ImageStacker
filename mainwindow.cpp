@@ -352,19 +352,33 @@ void MainWindow::on_horizontalSlider_sliderMoved(int position)
 void MainWindow::on_buttonReg_clicked()
 {
     StarDetection detector;
-    starsDetected = detector.detectStars(tempImage);
+    starsDetected = detector.detectStars(tempImage, contours, hierarchy);
 
 }
 
 void MainWindow::on_pushButton_6_pressed()
 {
-    QImage image(starsDetected.data, previewData.getWidth(), previewData.getHeight(), QImage::Format_RGB16);
+    /*QImage image(starsDetected.data, starsDetected.cols, starsDetected.rows, QImage::Format_Indexed8);
+    qDebug() << "after conversion";
+    QPixmap pixmap = QPixmap::fromImage(image);
+    scene->clear();
+    scene->addPixmap(pixmap);
+    ui->graphicsView->ensureVisible(scene->sceneRect());
+    ui->graphicsView->fitInView(scene->itemsBoundingRect(), Qt::KeepAspectRatio);*/
+
+    for (int i = 0; i < contours.size(); i++) {
+        cv::Scalar colour = cv::Scalar(255, 0 , 255);
+        cv::drawContours(tempImage, contours, i, colour, 2, 8, hierarchy, 0, cv::Point(0, 0));
+    }
+
+    QImage image(tempImage.data, tempImage.cols, tempImage.rows, QImage::Format_RGB32);
     qDebug() << "after conversion";
     QPixmap pixmap = QPixmap::fromImage(image);
     scene->clear();
     scene->addPixmap(pixmap);
     ui->graphicsView->ensureVisible(scene->sceneRect());
     ui->graphicsView->fitInView(scene->itemsBoundingRect(), Qt::KeepAspectRatio);
+
 }
 
 void MainWindow::on_pushButton_6_released()
