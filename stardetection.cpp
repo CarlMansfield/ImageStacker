@@ -34,8 +34,21 @@ cv::Mat StarDetection::detectStars(cv::Mat inputImage)
     cv::Mat thresholdImg = stars.clone();
 
     cv::threshold(stars, thresholdImg, 50, 255, cv::THRESH_BINARY);
+    std::vector<std::vector<cv::Point>> contours;
+    std::vector<cv::Vec4i> hierarchy;
+    cv::findContours(thresholdImg, contours, hierarchy, CV_RETR_TREE, CV_CHAIN_APPROX_SIMPLE, cv::Point(0, 0));
 
-    std::vector<cv::Vec3f> circles;
+    cv::Mat drawnCircles = cv::Mat::zeros(thresholdImg.size(), CV_8UC3);
+    for (int i = 0; i < contours.size(); i++) {
+        cv::Scalar colour = cv::Scalar(255, 0 , 255);
+        cv::drawContours(drawnCircles, contours, i, colour, 2, 8, hierarchy, 0, cv::Point(0, 0));
+    }
+
+    cv::imshow("circles", drawnCircles);
+    cv::waitKey(0);
+    //return drawnCircles;
+
+    /*std::vector<cv::Vec3f> circles;
     cv::HoughCircles(thresholdImg, circles, cv::HOUGH_GRADIENT, 1, thresholdImg.rows/8, 1, 10, 0, 0);
     cv::Mat drawnCircles = thresholdImg.clone();
 
@@ -49,7 +62,7 @@ cv::Mat StarDetection::detectStars(cv::Mat inputImage)
         cv::Point center = cv::Point(c[0], c[1]);
         int radius = c[2];
         cv::circle(drawnCircles, center, radius, cv::Scalar(255, 0, 255), 2, cv::LINE_AA);
-    }
+    }*/
 
     return drawnCircles;
 }
