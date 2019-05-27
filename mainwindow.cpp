@@ -353,7 +353,9 @@ void MainWindow::on_buttonReg_clicked()
 {
     StarDetection detector;
     starsDetected = detector.detectStars(tempImage, contours, hierarchy);
-
+    int stars = contours.size();
+    QTreeWidgetItem *item = ui->lightsTree->currentItem();
+    item->setText(7, QString::number(stars));
 }
 
 void MainWindow::on_pushButton_6_pressed()

@@ -34,6 +34,8 @@ cv::Mat StarDetection::detectStars(cv::Mat inputImage, std::vector<std::vector<c
     cv::Mat thresholdImg = stars.clone();
 
     cv::threshold(stars, thresholdImg, 25, 255, cv::THRESH_BINARY);
+    cv::erode(thresholdImg, thresholdImg, cv::Mat(), cv::Point(-1, -1), 3, 1, 1);
+    cv::dilate(thresholdImg, thresholdImg, cv::Mat(), cv::Point(-1, -1), 2, 1, 1);
     cv::findContours(thresholdImg, contours, hierarchy, CV_RETR_TREE, CV_CHAIN_APPROX_SIMPLE, cv::Point(0, 0));
 
     cv::Mat drawnCircles = cv::Mat::zeros(thresholdImg.size(), CV_8UC3);
