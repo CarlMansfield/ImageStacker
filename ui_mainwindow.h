@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created by: Qt User Interface Compiler version 5.7.0
+** Created by: Qt User Interface Compiler version 5.9.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -14,8 +14,8 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QComboBox>
-#include <QtWidgets/QFormLayout>
 #include <QtWidgets/QGraphicsView>
+#include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
@@ -23,9 +23,11 @@
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSlider>
+#include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTabWidget>
 #include <QtWidgets/QTreeWidget>
+#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -34,10 +36,6 @@ class Ui_MainWindow
 {
 public:
     QWidget *centralWidget;
-    QPushButton *pushButton;
-    QPushButton *pushButton_2;
-    QPushButton *pushButton_3;
-    QPushButton *pushButton_4;
     QLabel *label_2;
     QTreeWidget *lightsTree;
     QTabWidget *tabWidget;
@@ -49,19 +47,27 @@ public:
     QTreeWidget *flatsTree;
     QTreeWidget *biasTree;
     QGraphicsView *graphicsView;
-    QGraphicsView *graphicsView_2;
     QLabel *platform;
     QComboBox *comboBox;
     QComboBox *comboBox_2;
-    QPushButton *pushButton_5;
-    QWidget *verticalLayoutWidget;
-    QFormLayout *formLayout;
-    QPushButton *buttonReg;
-    QLabel *label;
     QSlider *horizontalSlider;
     QLabel *label_3;
     QPushButton *pushButton_6;
     QLabel *ramLabel;
+    QWidget *verticalLayoutWidget_2;
+    QVBoxLayout *verticalLayout_4;
+    QGroupBox *groupBox_3;
+    QVBoxLayout *verticalLayout_5;
+    QPushButton *pushButton;
+    QPushButton *pushButton_4;
+    QPushButton *pushButton_3;
+    QPushButton *pushButton_2;
+    QPushButton *pushButton_5;
+    QGroupBox *groupBox_4;
+    QVBoxLayout *verticalLayout_6;
+    QPushButton *buttonReg;
+    QLabel *label;
+    QSpacerItem *verticalSpacer_2;
     QMenuBar *menuBar;
     QMenu *menuHello;
     QStatusBar *statusBar;
@@ -92,30 +98,19 @@ public:
         MainWindow->setAutoFillBackground(true);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
-        pushButton = new QPushButton(centralWidget);
-        pushButton->setObjectName(QStringLiteral("pushButton"));
-        pushButton->setGeometry(QRect(10, 460, 75, 23));
-        pushButton_2 = new QPushButton(centralWidget);
-        pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
-        pushButton_2->setGeometry(QRect(10, 500, 75, 23));
-        pushButton_3 = new QPushButton(centralWidget);
-        pushButton_3->setObjectName(QStringLiteral("pushButton_3"));
-        pushButton_3->setGeometry(QRect(10, 540, 75, 23));
-        pushButton_4 = new QPushButton(centralWidget);
-        pushButton_4->setObjectName(QStringLiteral("pushButton_4"));
-        pushButton_4->setGeometry(QRect(10, 580, 75, 23));
         label_2 = new QLabel(centralWidget);
         label_2->setObjectName(QStringLiteral("label_2"));
         label_2->setGeometry(QRect(400, 0, 61, 16));
         lightsTree = new QTreeWidget(centralWidget);
+        lightsTree->headerItem()->setText(0, QString());
         lightsTree->setObjectName(QStringLiteral("lightsTree"));
         lightsTree->setEnabled(true);
-        lightsTree->setGeometry(QRect(100, 450, 961, 192));
+        lightsTree->setGeometry(QRect(20, 450, 1041, 192));
         lightsTree->setMinimumSize(QSize(259, 192));
         lightsTree->setFrameShadow(QFrame::Sunken);
         tabWidget = new QTabWidget(centralWidget);
         tabWidget->setObjectName(QStringLiteral("tabWidget"));
-        tabWidget->setGeometry(QRect(100, 430, 231, 80));
+        tabWidget->setGeometry(QRect(20, 430, 231, 80));
         QSizePolicy sizePolicy1(QSizePolicy::Expanding, QSizePolicy::Expanding);
         sizePolicy1.setHorizontalStretch(0);
         sizePolicy1.setVerticalStretch(0);
@@ -152,17 +147,17 @@ public:
         darksTree = new QTreeWidget(centralWidget);
         darksTree->setObjectName(QStringLiteral("darksTree"));
         darksTree->setEnabled(true);
-        darksTree->setGeometry(QRect(100, 450, 961, 192));
+        darksTree->setGeometry(QRect(20, 450, 1041, 192));
         darksTree->setMinimumSize(QSize(259, 192));
         flatsTree = new QTreeWidget(centralWidget);
         flatsTree->setObjectName(QStringLiteral("flatsTree"));
         flatsTree->setEnabled(true);
-        flatsTree->setGeometry(QRect(100, 450, 961, 192));
+        flatsTree->setGeometry(QRect(20, 450, 1041, 192));
         flatsTree->setMinimumSize(QSize(259, 192));
         biasTree = new QTreeWidget(centralWidget);
         biasTree->setObjectName(QStringLiteral("biasTree"));
         biasTree->setEnabled(true);
-        biasTree->setGeometry(QRect(100, 450, 961, 192));
+        biasTree->setGeometry(QRect(20, 450, 1041, 192));
         biasTree->setMinimumSize(QSize(259, 192));
         graphicsView = new QGraphicsView(centralWidget);
         graphicsView->setObjectName(QStringLiteral("graphicsView"));
@@ -174,31 +169,19 @@ public:
         graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         graphicsView->setSizeAdjustPolicy(QAbstractScrollArea::AdjustIgnored);
         graphicsView->setViewportUpdateMode(QGraphicsView::MinimalViewportUpdate);
-        graphicsView_2 = new QGraphicsView(centralWidget);
-        graphicsView_2->setObjectName(QStringLiteral("graphicsView_2"));
-        graphicsView_2->setGeometry(QRect(3, 450, 90, 201));
-        QPalette palette2;
-        QBrush brush4(QColor(74, 74, 74, 255));
-        brush4.setStyle(Qt::SolidPattern);
-        palette2.setBrush(QPalette::Active, QPalette::Base, brush4);
-        palette2.setBrush(QPalette::Inactive, QPalette::Base, brush4);
-        palette2.setBrush(QPalette::Disabled, QPalette::Base, brush1);
-        graphicsView_2->setPalette(palette2);
-        graphicsView_2->setFrameShape(QFrame::StyledPanel);
-        graphicsView_2->setFrameShadow(QFrame::Raised);
         platform = new QLabel(centralWidget);
         platform->setObjectName(QStringLiteral("platform"));
         platform->setGeometry(QRect(550, 660, 521, 16));
-        QPalette palette3;
-        palette3.setBrush(QPalette::Active, QPalette::WindowText, brush);
-        palette3.setBrush(QPalette::Active, QPalette::Text, brush);
-        palette3.setBrush(QPalette::Inactive, QPalette::WindowText, brush);
-        palette3.setBrush(QPalette::Inactive, QPalette::Text, brush);
-        QBrush brush5(QColor(120, 120, 120, 255));
-        brush5.setStyle(Qt::SolidPattern);
-        palette3.setBrush(QPalette::Disabled, QPalette::WindowText, brush5);
-        palette3.setBrush(QPalette::Disabled, QPalette::Text, brush5);
-        platform->setPalette(palette3);
+        QPalette palette2;
+        palette2.setBrush(QPalette::Active, QPalette::WindowText, brush);
+        palette2.setBrush(QPalette::Active, QPalette::Text, brush);
+        palette2.setBrush(QPalette::Inactive, QPalette::WindowText, brush);
+        palette2.setBrush(QPalette::Inactive, QPalette::Text, brush);
+        QBrush brush4(QColor(120, 120, 120, 255));
+        brush4.setStyle(Qt::SolidPattern);
+        palette2.setBrush(QPalette::Disabled, QPalette::WindowText, brush4);
+        palette2.setBrush(QPalette::Disabled, QPalette::Text, brush4);
+        platform->setPalette(palette2);
         platform->setLayoutDirection(Qt::LeftToRight);
         platform->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
         comboBox = new QComboBox(centralWidget);
@@ -208,37 +191,6 @@ public:
         comboBox_2->setObjectName(QStringLiteral("comboBox_2"));
         comboBox_2->setEnabled(true);
         comboBox_2->setGeometry(QRect(470, 650, 201, 22));
-        pushButton_5 = new QPushButton(centralWidget);
-        pushButton_5->setObjectName(QStringLiteral("pushButton_5"));
-        pushButton_5->setGeometry(QRect(10, 620, 75, 23));
-        verticalLayoutWidget = new QWidget(centralWidget);
-        verticalLayoutWidget->setObjectName(QStringLiteral("verticalLayoutWidget"));
-        verticalLayoutWidget->setGeometry(QRect(10, 10, 161, 63));
-        formLayout = new QFormLayout(verticalLayoutWidget);
-        formLayout->setSpacing(6);
-        formLayout->setContentsMargins(11, 11, 11, 11);
-        formLayout->setObjectName(QStringLiteral("formLayout"));
-        formLayout->setContentsMargins(0, 0, 0, 0);
-        buttonReg = new QPushButton(verticalLayoutWidget);
-        buttonReg->setObjectName(QStringLiteral("buttonReg"));
-        QSizePolicy sizePolicy2(QSizePolicy::Minimum, QSizePolicy::Maximum);
-        sizePolicy2.setHorizontalStretch(0);
-        sizePolicy2.setVerticalStretch(0);
-        sizePolicy2.setHeightForWidth(buttonReg->sizePolicy().hasHeightForWidth());
-        buttonReg->setSizePolicy(sizePolicy2);
-
-        formLayout->setWidget(0, QFormLayout::LabelRole, buttonReg);
-
-        label = new QLabel(verticalLayoutWidget);
-        label->setObjectName(QStringLiteral("label"));
-        QSizePolicy sizePolicy3(QSizePolicy::Fixed, QSizePolicy::Maximum);
-        sizePolicy3.setHorizontalStretch(0);
-        sizePolicy3.setVerticalStretch(0);
-        sizePolicy3.setHeightForWidth(label->sizePolicy().hasHeightForWidth());
-        label->setSizePolicy(sizePolicy3);
-
-        formLayout->setWidget(1, QFormLayout::SpanningRole, label);
-
         horizontalSlider = new QSlider(centralWidget);
         horizontalSlider->setObjectName(QStringLiteral("horizontalSlider"));
         horizontalSlider->setGeometry(QRect(920, 0, 84, 15));
@@ -254,31 +206,100 @@ public:
         ramLabel = new QLabel(centralWidget);
         ramLabel->setObjectName(QStringLiteral("ramLabel"));
         ramLabel->setGeometry(QRect(10, 660, 47, 13));
+        verticalLayoutWidget_2 = new QWidget(centralWidget);
+        verticalLayoutWidget_2->setObjectName(QStringLiteral("verticalLayoutWidget_2"));
+        verticalLayoutWidget_2->setGeometry(QRect(10, 10, 161, 401));
+        verticalLayout_4 = new QVBoxLayout(verticalLayoutWidget_2);
+        verticalLayout_4->setSpacing(6);
+        verticalLayout_4->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_4->setObjectName(QStringLiteral("verticalLayout_4"));
+        verticalLayout_4->setContentsMargins(0, 0, 0, 0);
+        groupBox_3 = new QGroupBox(verticalLayoutWidget_2);
+        groupBox_3->setObjectName(QStringLiteral("groupBox_3"));
+        verticalLayout_5 = new QVBoxLayout(groupBox_3);
+        verticalLayout_5->setSpacing(6);
+        verticalLayout_5->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_5->setObjectName(QStringLiteral("verticalLayout_5"));
+        pushButton = new QPushButton(groupBox_3);
+        pushButton->setObjectName(QStringLiteral("pushButton"));
+
+        verticalLayout_5->addWidget(pushButton);
+
+        pushButton_4 = new QPushButton(groupBox_3);
+        pushButton_4->setObjectName(QStringLiteral("pushButton_4"));
+
+        verticalLayout_5->addWidget(pushButton_4);
+
+        pushButton_3 = new QPushButton(groupBox_3);
+        pushButton_3->setObjectName(QStringLiteral("pushButton_3"));
+
+        verticalLayout_5->addWidget(pushButton_3);
+
+        pushButton_2 = new QPushButton(groupBox_3);
+        pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
+
+        verticalLayout_5->addWidget(pushButton_2);
+
+        pushButton_5 = new QPushButton(groupBox_3);
+        pushButton_5->setObjectName(QStringLiteral("pushButton_5"));
+
+        verticalLayout_5->addWidget(pushButton_5);
+
+
+        verticalLayout_4->addWidget(groupBox_3);
+
+        groupBox_4 = new QGroupBox(verticalLayoutWidget_2);
+        groupBox_4->setObjectName(QStringLiteral("groupBox_4"));
+        verticalLayout_6 = new QVBoxLayout(groupBox_4);
+        verticalLayout_6->setSpacing(6);
+        verticalLayout_6->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_6->setObjectName(QStringLiteral("verticalLayout_6"));
+        buttonReg = new QPushButton(groupBox_4);
+        buttonReg->setObjectName(QStringLiteral("buttonReg"));
+        QSizePolicy sizePolicy2(QSizePolicy::Minimum, QSizePolicy::Maximum);
+        sizePolicy2.setHorizontalStretch(0);
+        sizePolicy2.setVerticalStretch(0);
+        sizePolicy2.setHeightForWidth(buttonReg->sizePolicy().hasHeightForWidth());
+        buttonReg->setSizePolicy(sizePolicy2);
+
+        verticalLayout_6->addWidget(buttonReg);
+
+        label = new QLabel(groupBox_4);
+        label->setObjectName(QStringLiteral("label"));
+        QSizePolicy sizePolicy3(QSizePolicy::Fixed, QSizePolicy::Maximum);
+        sizePolicy3.setHorizontalStretch(0);
+        sizePolicy3.setVerticalStretch(0);
+        sizePolicy3.setHeightForWidth(label->sizePolicy().hasHeightForWidth());
+        label->setSizePolicy(sizePolicy3);
+
+        verticalLayout_6->addWidget(label);
+
+        verticalSpacer_2 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        verticalLayout_6->addItem(verticalSpacer_2);
+
+
+        verticalLayout_4->addWidget(groupBox_4);
+
         MainWindow->setCentralWidget(centralWidget);
-        graphicsView_2->raise();
         tabWidget->raise();
-        pushButton->raise();
-        pushButton_2->raise();
-        pushButton_3->raise();
-        pushButton_4->raise();
         label_2->raise();
         darksTree->raise();
         flatsTree->raise();
         biasTree->raise();
-        lightsTree->raise();
         graphicsView->raise();
         platform->raise();
         comboBox->raise();
         comboBox_2->raise();
-        pushButton_5->raise();
-        verticalLayoutWidget->raise();
         horizontalSlider->raise();
         label_3->raise();
         pushButton_6->raise();
         ramLabel->raise();
+        verticalLayoutWidget_2->raise();
+        lightsTree->raise();
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 1080, 22));
+        menuBar->setGeometry(QRect(0, 0, 1080, 20));
         menuHello = new QMenu(menuBar);
         menuHello->setObjectName(QStringLiteral("menuHello"));
         MainWindow->setMenuBar(menuBar);
@@ -298,57 +319,59 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", 0));
-        pushButton->setText(QApplication::translate("MainWindow", "Add Lights...", 0));
-        pushButton_2->setText(QApplication::translate("MainWindow", "Add Darks...", 0));
-        pushButton_3->setText(QApplication::translate("MainWindow", "Add Flats...", 0));
-        pushButton_4->setText(QApplication::translate("MainWindow", "Add Bias...", 0));
-        label_2->setText(QApplication::translate("MainWindow", "Preview:", 0));
+        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", Q_NULLPTR));
+        label_2->setText(QApplication::translate("MainWindow", "Preview:", Q_NULLPTR));
         QTreeWidgetItem *___qtreewidgetitem = lightsTree->headerItem();
-        ___qtreewidgetitem->setText(7, QApplication::translate("MainWindow", "Stars", 0));
-        ___qtreewidgetitem->setText(6, QApplication::translate("MainWindow", "Temp", 0));
-        ___qtreewidgetitem->setText(5, QApplication::translate("MainWindow", "Camera", 0));
-        ___qtreewidgetitem->setText(4, QApplication::translate("MainWindow", "Date/Time", 0));
-        ___qtreewidgetitem->setText(3, QApplication::translate("MainWindow", "Resolution", 0));
-        ___qtreewidgetitem->setText(2, QApplication::translate("MainWindow", "Exposure", 0));
-        ___qtreewidgetitem->setText(1, QApplication::translate("MainWindow", "ISO", 0));
-        ___qtreewidgetitem->setText(0, QApplication::translate("MainWindow", "Name", 0));
-        tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("MainWindow", "Lights", 0));
-        tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("MainWindow", "Darks", 0));
-        tabWidget->setTabText(tabWidget->indexOf(tab_3), QApplication::translate("MainWindow", "Flats", 0));
-        tabWidget->setTabText(tabWidget->indexOf(tab_4), QApplication::translate("MainWindow", "Bias", 0));
+        ___qtreewidgetitem->setText(8, QApplication::translate("MainWindow", "Stars", Q_NULLPTR));
+        ___qtreewidgetitem->setText(7, QApplication::translate("MainWindow", "Temp", Q_NULLPTR));
+        ___qtreewidgetitem->setText(6, QApplication::translate("MainWindow", "Camera", Q_NULLPTR));
+        ___qtreewidgetitem->setText(5, QApplication::translate("MainWindow", "Date/Time", Q_NULLPTR));
+        ___qtreewidgetitem->setText(4, QApplication::translate("MainWindow", "Resolution", Q_NULLPTR));
+        ___qtreewidgetitem->setText(3, QApplication::translate("MainWindow", "Exposure", Q_NULLPTR));
+        ___qtreewidgetitem->setText(2, QApplication::translate("MainWindow", "ISO", Q_NULLPTR));
+        ___qtreewidgetitem->setText(1, QApplication::translate("MainWindow", "Name", Q_NULLPTR));
+        tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("MainWindow", "Lights", Q_NULLPTR));
+        tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("MainWindow", "Darks", Q_NULLPTR));
+        tabWidget->setTabText(tabWidget->indexOf(tab_3), QApplication::translate("MainWindow", "Flats", Q_NULLPTR));
+        tabWidget->setTabText(tabWidget->indexOf(tab_4), QApplication::translate("MainWindow", "Bias", Q_NULLPTR));
         QTreeWidgetItem *___qtreewidgetitem1 = darksTree->headerItem();
-        ___qtreewidgetitem1->setText(5, QApplication::translate("MainWindow", "Camera", 0));
-        ___qtreewidgetitem1->setText(4, QApplication::translate("MainWindow", "Date/Time", 0));
-        ___qtreewidgetitem1->setText(3, QApplication::translate("MainWindow", "Exposure", 0));
-        ___qtreewidgetitem1->setText(2, QApplication::translate("MainWindow", "ISO", 0));
-        ___qtreewidgetitem1->setText(1, QApplication::translate("MainWindow", "Name", 0));
-        ___qtreewidgetitem1->setText(0, QApplication::translate("MainWindow", "Path", 0));
+        ___qtreewidgetitem1->setText(5, QApplication::translate("MainWindow", "Camera", Q_NULLPTR));
+        ___qtreewidgetitem1->setText(4, QApplication::translate("MainWindow", "Date/Time", Q_NULLPTR));
+        ___qtreewidgetitem1->setText(3, QApplication::translate("MainWindow", "Exposure", Q_NULLPTR));
+        ___qtreewidgetitem1->setText(2, QApplication::translate("MainWindow", "ISO", Q_NULLPTR));
+        ___qtreewidgetitem1->setText(1, QApplication::translate("MainWindow", "Name", Q_NULLPTR));
+        ___qtreewidgetitem1->setText(0, QApplication::translate("MainWindow", "Path", Q_NULLPTR));
         QTreeWidgetItem *___qtreewidgetitem2 = flatsTree->headerItem();
-        ___qtreewidgetitem2->setText(5, QApplication::translate("MainWindow", "Camera", 0));
-        ___qtreewidgetitem2->setText(4, QApplication::translate("MainWindow", "Date/Time", 0));
-        ___qtreewidgetitem2->setText(3, QApplication::translate("MainWindow", "Exposure", 0));
-        ___qtreewidgetitem2->setText(2, QApplication::translate("MainWindow", "ISO", 0));
-        ___qtreewidgetitem2->setText(1, QApplication::translate("MainWindow", "Name", 0));
-        ___qtreewidgetitem2->setText(0, QApplication::translate("MainWindow", "Path", 0));
+        ___qtreewidgetitem2->setText(5, QApplication::translate("MainWindow", "Camera", Q_NULLPTR));
+        ___qtreewidgetitem2->setText(4, QApplication::translate("MainWindow", "Date/Time", Q_NULLPTR));
+        ___qtreewidgetitem2->setText(3, QApplication::translate("MainWindow", "Exposure", Q_NULLPTR));
+        ___qtreewidgetitem2->setText(2, QApplication::translate("MainWindow", "ISO", Q_NULLPTR));
+        ___qtreewidgetitem2->setText(1, QApplication::translate("MainWindow", "Name", Q_NULLPTR));
+        ___qtreewidgetitem2->setText(0, QApplication::translate("MainWindow", "Path", Q_NULLPTR));
         QTreeWidgetItem *___qtreewidgetitem3 = biasTree->headerItem();
-        ___qtreewidgetitem3->setText(5, QApplication::translate("MainWindow", "Camera", 0));
-        ___qtreewidgetitem3->setText(4, QApplication::translate("MainWindow", "Date/Time", 0));
-        ___qtreewidgetitem3->setText(3, QApplication::translate("MainWindow", "Exposure", 0));
-        ___qtreewidgetitem3->setText(2, QApplication::translate("MainWindow", "ISO", 0));
-        ___qtreewidgetitem3->setText(1, QApplication::translate("MainWindow", "Name", 0));
-        ___qtreewidgetitem3->setText(0, QApplication::translate("MainWindow", "Path", 0));
-        platform->setText(QApplication::translate("MainWindow", "TextLabel", 0));
-        pushButton_5->setText(QApplication::translate("MainWindow", "Directory", 0));
-        buttonReg->setText(QApplication::translate("MainWindow", "Register", 0));
-        label->setText(QApplication::translate("MainWindow", "Star threshold: 50", 0));
+        ___qtreewidgetitem3->setText(5, QApplication::translate("MainWindow", "Camera", Q_NULLPTR));
+        ___qtreewidgetitem3->setText(4, QApplication::translate("MainWindow", "Date/Time", Q_NULLPTR));
+        ___qtreewidgetitem3->setText(3, QApplication::translate("MainWindow", "Exposure", Q_NULLPTR));
+        ___qtreewidgetitem3->setText(2, QApplication::translate("MainWindow", "ISO", Q_NULLPTR));
+        ___qtreewidgetitem3->setText(1, QApplication::translate("MainWindow", "Name", Q_NULLPTR));
+        ___qtreewidgetitem3->setText(0, QApplication::translate("MainWindow", "Path", Q_NULLPTR));
+        platform->setText(QApplication::translate("MainWindow", "TextLabel", Q_NULLPTR));
 #ifndef QT_NO_TOOLTIP
-        horizontalSlider->setToolTip(QApplication::translate("MainWindow", "<html><head/><body><p>Adjust threshold until 10-20 stars are visible</p></body></html>", 0));
+        horizontalSlider->setToolTip(QApplication::translate("MainWindow", "<html><head/><body><p>Adjust threshold until 10-20 stars are visible</p></body></html>", Q_NULLPTR));
 #endif // QT_NO_TOOLTIP
-        label_3->setText(QApplication::translate("MainWindow", "Brightness", 0));
-        pushButton_6->setText(QApplication::translate("MainWindow", "Show stars", 0));
-        ramLabel->setText(QApplication::translate("MainWindow", "TextLabel", 0));
-        menuHello->setTitle(QApplication::translate("MainWindow", "Hello", 0));
+        label_3->setText(QApplication::translate("MainWindow", "Brightness", Q_NULLPTR));
+        pushButton_6->setText(QApplication::translate("MainWindow", "Show stars", Q_NULLPTR));
+        ramLabel->setText(QApplication::translate("MainWindow", "TextLabel", Q_NULLPTR));
+        groupBox_3->setTitle(QApplication::translate("MainWindow", "Add Images", Q_NULLPTR));
+        pushButton->setText(QApplication::translate("MainWindow", "Add Lights...", Q_NULLPTR));
+        pushButton_4->setText(QApplication::translate("MainWindow", "Add Bias...", Q_NULLPTR));
+        pushButton_3->setText(QApplication::translate("MainWindow", "Add Flats...", Q_NULLPTR));
+        pushButton_2->setText(QApplication::translate("MainWindow", "Add Darks...", Q_NULLPTR));
+        pushButton_5->setText(QApplication::translate("MainWindow", "Directory", Q_NULLPTR));
+        groupBox_4->setTitle(QApplication::translate("MainWindow", "Registration", Q_NULLPTR));
+        buttonReg->setText(QApplication::translate("MainWindow", "Register", Q_NULLPTR));
+        label->setText(QApplication::translate("MainWindow", "Star threshold: 50", Q_NULLPTR));
+        menuHello->setTitle(QApplication::translate("MainWindow", "Hello", Q_NULLPTR));
     } // retranslateUi
 
 };

@@ -11,6 +11,10 @@
 #include <iomanip>
 #include <libraw/libraw.h>
 #include <exiv2/exiv2.hpp>
+#include "opencv2/core/cuda.hpp"
+#include "opencv2/highgui.hpp"
+#include "opencv2/imgproc.hpp"
+#include "opencv2/core.hpp"
 
 #ifdef __APPLE__
 #include <cl.hpp>
@@ -319,21 +323,21 @@ void MainWindow::updateTable() {
         temp = std::count(filename.begin(), filename.end(), '/');
         //QString name = QString::fromStdString(path[temp - 1]);
         std::string name = path[temp];
-        item->setText(0, name.c_str());
+        item->setText(1, name.c_str());
 
-        item->setText(1, QString::number(images[i].getISO()));
-        item->setText(2, images[i].getExposure());
+        item->setText(2, QString::number(images[i].getISO()));
+        item->setText(3, images[i].getExposure());
         qDebug() << images[i].getExposure();
-        item->setText(3, images[i].getDimensions());
-        item->setText(4, images[i].getDateTime());
-        item->setText(5, images[i].getCamera());
+        item->setText(4, images[i].getDimensions());
+        item->setText(5, images[i].getDateTime());
+        item->setText(6, images[i].getCamera());
         ss.clear();
         ss.str(std::string());
         ss.precision(2);
         ss << images[i].getTemp();
-        item->setText(6, QString::fromStdString(ss.str()).append("°C"));
-
-
+        item->setText(7, QString::fromStdString(ss.str()).append("°C"));
+        item->setFlags(item->flags() | Qt::ItemIsUserCheckable | Qt::ItemIsSelectable);
+        item->setCheckState(0, Qt::Checked);
         ui->lightsTree->addTopLevelItem(item);
 
         pixmap = QPixmap(filename);
@@ -355,7 +359,7 @@ void MainWindow::on_buttonReg_clicked()
     starsDetected = detector.detectStars(tempImage, contours, hierarchy);
     int stars = contours.size();
     QTreeWidgetItem *item = ui->lightsTree->currentItem();
-    item->setText(7, QString::number(stars));
+    item->setText(8, QString::number(stars));
 }
 
 void MainWindow::on_pushButton_6_pressed()
@@ -380,6 +384,8 @@ void MainWindow::on_pushButton_6_pressed()
     scene->addPixmap(pixmap);
     ui->graphicsView->ensureVisible(scene->sceneRect());
     ui->graphicsView->fitInView(scene->itemsBoundingRect(), Qt::KeepAspectRatio);
+
+    //cv::cuda::GpuMat test;
 
 }
 
