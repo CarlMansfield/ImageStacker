@@ -7,6 +7,7 @@
 #include <QGraphicsScene>
 #include <QGraphicsItem>
 #include <QSettings>
+#include <QThread>
 #include "imagedata.h"
 #include "imagetools.h"
 #include "stardetection.h"
@@ -25,7 +26,6 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_pushButton_clicked();
 
     void on_lightsTree_itemClicked(QTreeWidgetItem *item, int column);
 
@@ -47,6 +47,14 @@ private slots:
 
     void on_pushButton_6_released();
 
+    void storeData(ImageData imgData);
+
+    void on_pushButton_clicked();
+
+    void display_changed_brightness();
+
+    void display_preview();
+
 protected:
     void mouseMoveEvent(QMouseEvent * event);
 
@@ -54,11 +62,10 @@ protected:
 
     void updateTable();
 
-    void display_preview();
-
-    void display_changed_brightness();
-
     void getRamUsage();
+
+signals:
+    void loadAnImage();
 
 private:
     Ui::MainWindow *ui;
@@ -71,6 +78,9 @@ private:
     QSettings defaultSettings;
     std::vector<std::vector<cv::Point>> contours;
     std::vector<cv::Vec4i> hierarchy;
+    QThread *workerT;
+    ImageTools *imgTools;
+    bool workerRunning = false;
 };
 
 #endif // MAINWINDOW_H

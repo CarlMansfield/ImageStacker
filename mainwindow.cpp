@@ -82,11 +82,19 @@ MainWindow::MainWindow(QWidget *parent) :
         ui->platform->setText(QString::fromStdString(s));
     }
     ui->ramLabel->setText("RAM usage: ");
+    workerT = new QThread();
+    imgTools = new ImageTools();
+    imgTools->doSetup(*workerT);
+    imgTools->moveToThread(workerT);
+    connect(imgTools, SIGNAL(imageRead()), this, SLOT(display_changed_brightness()));
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+    workerT->wait();
+    workerT->quit();
+    delete workerT;
 }
 
 void MainWindow::on_pushButton_clicked()
@@ -104,8 +112,13 @@ void MainWindow::on_pushButton_clicked()
         }
     }
     updateTable();
-    previewData.data = previewData.loadFromFile();
-    display_changed_brightness();
+    imgTools->tempData = &previewData;
+    workerT->start();
+}
+
+void MainWindow::storeData(ImageData imgData)
+{
+    //imgData.data = pixels;
 }
 
 void MainWindow::on_comboBox_currentIndexChanged(int index)
@@ -140,36 +153,9 @@ void MainWindow::on_lightsTree_itemClicked(QTreeWidgetItem *item, int column)
     QModelIndex index = ui->lightsTree->currentIndex();
     row = index.row();
     QString filename = images[row].getPath();
-    /*LibRaw processor;
-    processor.open_file(filename.toStdString().c_str());
-    processor.unpack();
-    processor.imgdata.params.no_auto_bright = 1;
-    processor.dcraw_process();
-    libraw_processed_image_t *output = processor.dcraw_make_mem_image();
-    uchar *pixels;
-    int pixelCount = images[row].getWidth() * images[row].getHeight();
-    int colorSize = output->bits / 8;
-    qDebug(QString::number(colorSize).toStdString().c_str());
-    int pixelSize = output->colors * colorSize;
-    qDebug(QString::number(pixelSize).toStdString().c_str());
-    pixels = new uchar[pixelCount * 4];
-    uchar *data = output->data;
-    for (int i = 0; i < pixelCount; i++, data += pixelSize) {
-        if (output->colors == 3) {
-            pixels[i * 4] = data[2 * colorSize];
-            pixels[i * 4 + 1] = data[1 * colorSize];
-            pixels[i * 4 + 2] = data[0];
-        } else {
-            pixels[i * 4] = data[0];
-            pixels[i * 4 + 1] = data[0];
-            pixels[i * 4 + 2] = data[0];
-        }
-    }*/
     previewData = images[row];
-    qDebug("Testststst");
-    previewData.data = previewData.loadFromFile();
-    qDebug("Loaded successfully");
-    display_changed_brightness();
+    imgTools->tempData = &previewData;
+    workerT->start();
     std::cout << &previewData << std::endl;
 }
 
@@ -185,13 +171,18 @@ void MainWindow::display_preview()
 
 void MainWindow::display_changed_brightness()
 {
+    workerT->terminate();
+    //previewData = *imgTools->tempData;
+    qDebug() << "displaying image";
     tempImage = ImageTools::increaseBrightness(previewData, ui->horizontalSlider->value()-50);
+    qDebug("Before return");
     QImage image(tempImage.data, previewData.getWidth(), previewData.getHeight(), QImage::Format_RGB32);
     QPixmap pixmap = QPixmap::fromImage(image);
     scene->clear();
     scene->addPixmap(pixmap);
     ui->graphicsView->ensureVisible(scene->sceneRect());
     ui->graphicsView->fitInView(scene->itemsBoundingRect(), Qt::KeepAspectRatio);
+    imgTools->clearCache();
 }
 
 void MainWindow::mouseMoveEvent(QMouseEvent *event)
