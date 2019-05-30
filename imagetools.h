@@ -22,6 +22,7 @@ signals:
     void imageRead();
 private:
     uchar* pixels = nullptr;
+    LibRaw processor;
 };
 
 #endif // IMAGETOOLS_H

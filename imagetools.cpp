@@ -28,12 +28,13 @@ void ImageTools::doSetup(QThread &thread)
 
 void ImageTools::loadFromFile()
 {
-    LibRaw processor;
+    qDebug() << "before thread start";
+    qDebug() << "before thread start";
     processor.open_file(tempData->getPath().toStdString().c_str());
     processor.unpack();
     processor.imgdata.params.no_auto_bright = 1;
     processor.dcraw_process();
-
+    qDebug() << "before thread start";
     libraw_processed_image_t *output = processor.dcraw_make_mem_image();
     int pixelCount = tempData->getWidth() * tempData->getHeight();
     int colorSize = output->bits / 8;

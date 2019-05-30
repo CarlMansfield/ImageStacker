@@ -148,7 +148,7 @@ void MainWindow::refreshUsedDevice()
 
 void MainWindow::on_lightsTree_itemClicked(QTreeWidgetItem *item, int column)
 {
-    previewData.clear();
+    //previewData.clear();
     int row;
     QModelIndex index = ui->lightsTree->currentIndex();
     row = index.row();
