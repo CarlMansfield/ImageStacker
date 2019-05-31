@@ -81,6 +81,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
         ui->platform->setText(QString::fromStdString(s));
     }
+    ui->lightsTree->setColumnWidth(0, 40);
     ui->ramLabel->setText("RAM usage: ");
     workerT = new QThread();
     imgTools = new ImageTools();
@@ -111,6 +112,7 @@ void MainWindow::on_pushButton_clicked()
             open_image(filename);
         }
     }
+    imgTools->clearCache();
     updateTable();
     imgTools->tempData = &previewData;
     workerT->start();
@@ -154,6 +156,7 @@ void MainWindow::on_lightsTree_itemClicked(QTreeWidgetItem *item, int column)
     row = index.row();
     QString filename = images[row].getPath();
     previewData = images[row];
+    imgTools->clearCache();
     imgTools->tempData = &previewData;
     workerT->start();
     std::cout << &previewData << std::endl;
@@ -172,7 +175,6 @@ void MainWindow::display_preview()
 void MainWindow::display_changed_brightness()
 {
     workerT->terminate();
-    //previewData = *imgTools->tempData;
     qDebug() << "displaying image";
     tempImage = ImageTools::increaseBrightness(previewData, ui->horizontalSlider->value()-50);
     qDebug("Before return");
@@ -182,7 +184,6 @@ void MainWindow::display_changed_brightness()
     scene->addPixmap(pixmap);
     ui->graphicsView->ensureVisible(scene->sceneRect());
     ui->graphicsView->fitInView(scene->itemsBoundingRect(), Qt::KeepAspectRatio);
-    imgTools->clearCache();
 }
 
 void MainWindow::mouseMoveEvent(QMouseEvent *event)
@@ -329,6 +330,7 @@ void MainWindow::updateTable() {
         item->setText(7, QString::fromStdString(ss.str()).append("°C"));
         item->setFlags(item->flags() | Qt::ItemIsUserCheckable | Qt::ItemIsSelectable);
         item->setCheckState(0, Qt::Checked);
+        item->setTextAlignment(0, Qt::AlignLeft);
         ui->lightsTree->addTopLevelItem(item);
 
         pixmap = QPixmap(filename);
@@ -375,9 +377,6 @@ void MainWindow::on_pushButton_6_pressed()
     scene->addPixmap(pixmap);
     ui->graphicsView->ensureVisible(scene->sceneRect());
     ui->graphicsView->fitInView(scene->itemsBoundingRect(), Qt::KeepAspectRatio);
-
-    //cv::cuda::GpuMat test;
-
 }
 
 void MainWindow::on_pushButton_6_released()
