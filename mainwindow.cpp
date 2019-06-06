@@ -3,6 +3,7 @@
 #include<QFileDialog>
 #include<QMessageBox>
 #include<QDebug>
+#include <QMovie>
 #include<sstream>
 #include<string>
 #include<utility>
@@ -44,10 +45,14 @@ MainWindow::MainWindow(QWidget *parent) :
     }
     QPalette palette;
     palette.setColor(QPalette::WindowText, Qt::white);
+    palette.setColor(QPalette::ButtonText, Qt::black);
     ui->label_2->setPalette(palette);
     ui->label->setPalette(palette);
     ui->label_3->setPalette(palette);
     ui->ramLabel->setPalette(palette);
+    ui->groupBox_3->setPalette(palette);
+    ui->groupBox_4->setPalette(palette);
+    ui->lightsTree->setPalette(palette);
     this->setFixedSize(this->maximumSize());
     ui->lightsTree->setContextMenuPolicy(Qt::ActionsContextMenu);
     QAction* removeAction;
@@ -83,6 +88,12 @@ MainWindow::MainWindow(QWidget *parent) :
     }
     ui->lightsTree->setColumnWidth(0, 40);
     ui->ramLabel->setText("RAM usage: ");
+    QMovie* movie = new QMovie("35.gif");
+    ui->label_4->setScaledContents(true);
+    ui->label_4->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
+    ui->label_4->setMovie(movie);
+    movie->start();
+    ui->label_4->hide();
     workerT = new QThread();
     imgTools = new ImageTools();
     imgTools->doSetup(*workerT);
@@ -116,6 +127,8 @@ void MainWindow::on_pushButton_clicked()
     updateTable();
     imgTools->tempData = &previewData;
     workerT->start();
+    ui->label_4->show();
+    workerRunning = true;
 }
 
 void MainWindow::storeData(ImageData imgData)
@@ -156,10 +169,14 @@ void MainWindow::on_lightsTree_itemClicked(QTreeWidgetItem *item, int column)
     row = index.row();
     QString filename = images[row].getPath();
     previewData = images[row];
-    imgTools->clearCache();
-    imgTools->tempData = &previewData;
-    workerT->start();
-    std::cout << &previewData << std::endl;
+    if (!workerRunning) {
+        imgTools->clearCache();
+        imgTools->tempData = &previewData;
+        workerT->start();
+        workerRunning = true;
+        ui->label_4->show();
+    }
+    //std::cout << &previewData << std::endl;
 }
 
 void MainWindow::display_preview()
@@ -170,6 +187,8 @@ void MainWindow::display_preview()
     scene->addPixmap(pixmap);
     ui->graphicsView->ensureVisible(scene->sceneRect());
     ui->graphicsView->fitInView(scene->itemsBoundingRect(), Qt::KeepAspectRatio);
+    ui->label_4->hide();
+    workerRunning = false;
 }
 
 void MainWindow::display_changed_brightness()
@@ -184,6 +203,8 @@ void MainWindow::display_changed_brightness()
     scene->addPixmap(pixmap);
     ui->graphicsView->ensureVisible(scene->sceneRect());
     ui->graphicsView->fitInView(scene->itemsBoundingRect(), Qt::KeepAspectRatio);
+    ui->label_4->hide();
+    workerRunning = false;
 }
 
 void MainWindow::mouseMoveEvent(QMouseEvent *event)
