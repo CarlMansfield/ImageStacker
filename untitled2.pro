@@ -63,3 +63,6 @@ win32 {
 INCLUDEPATH += $$PWD/libraw \
 
 DEPENDPATH += $$PWD/libraw \
+
+DISTFILES += \
+    35.gif
